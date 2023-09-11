@@ -1,32 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="esp">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>T.S.A</title>
   </head>
   <body>
-    <div class="formulario">
-      <h2>Registrar Profesor</h2>
-      <form method="post" action="insertProfesor.php">
-        <input type="text" name="prof_DNI" placeholder="DNI" />
-        <input type="text" name="nombre" placeholder="Nombre" />
-        <input type="text" name="apellido" placeholder="apellido" />
-        <input type="text" name="telefono" placeholder="telefono" />
-        <button type="submit">registrar profesor</button>
-      </form>
-      <div class="formulario">
-        <form action="insertAlumnos.php" method="post">
-          <input type="text" name="alumn_dni" placeholder="DNI del alumno" />
-          <input type="text" name="nombre" placeholder="Nombre del alumno" />
-          <input type="text" name="apellido" placeholder="Apellido de Alumno" />
-          <input
-            type="date"
-            name="fecha_nac"
-            placeholder="Fecha de Nacimiento"
-          />
-          <button type="submit">Registrar Alumno</button>
-        </form>
+    <div class="menu">
+      <h2>T.S.A</h2>
+      <a href="src/insertDocente.html">Registrar docente</a>
+      <a href="src/insertAlumno.html">Registrar Alumno</a>
       </div>
     </div>
   </body>
