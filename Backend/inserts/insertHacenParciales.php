@@ -4,18 +4,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nota = $_POST["nota"];
     $parcial_id = $_POST["id"];
     $alumno_dni = $_POST["DNI"];
-    if ($nota && $parcial_id && $alumno_dni  != NULL) {
-        $query = "insert into hacen(nota,id,DNI) 
-            values(:nota,:id,:DNI)";
-        $stmt = $connect->prepare($query);
-        $stmt->bindParam("nota:", $nota);
-        $stmt->bindParam("id:", $parcial_id);
-        $stmt->bindParam("DNI:", $alumno_dni);
-        $stmt->execute();
-        print($nombre);
+    if ($nota && $parcial_id && $alumn_dni != NULL) {
+        $check_query = "SELECT COUNT(*) FROM alumno WHERE alumno_dni = :alumno_dni";
+        $check_stmt = $connect->prepare($check_query);
+        $check_stmt->bindParam(":alumno_dni", $alumno_dni);
+        $check_stmt->execute();
+        $num_rows = $check_stmt->fetchColumn();
+
+        if ($num_rows == 0) {
+            $query = "insert into realizan(nota,id,DNI) 
+            values(:nota,:nombre,:DNI,)";
+            $stmt = $connect->prepare($query);
+            $stmt->bindParam(":nota", $nota);
+            $stmt->bindParam(":id", $parcial_id);
+            $stmt->bindParam(":dni", $alumno_dni);
+            $stmt->execute();
+            print($nombre . "agregado correctamente.");
+        } else {
+            print("DATOS YA EXISTENTES");
+        }
     } else {
         print("DATOS VACIOS");
     }
-} else {
-    print("METODO NO VALIDO");
 }

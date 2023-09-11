@@ -1,3 +1,4 @@
+
 CREATE DATABASE Asistencia;
 
 USE Asistencia;
@@ -9,16 +10,36 @@ CREATE TABLE Profesor (
     nombre VARCHAR(100) NOT NULL
 );
 
-CREATE TABLE Materia (
-    materia_ID INT PRIMARY KEY,
+CREATE TABLE Materia ( 
+    materia_ID INT PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(100) NOT NULL,
-    dias VARCHAR(100) NOT NULL,
     profesor_FK INT,
     FOREIGN KEY (profesor_FK) REFERENCES Profesor(prof_DNI)
 );
 
+CREATE TABLE DIAS_MATERIAS(
+	dias_fk INT,
+	FOREIGN KEY (dias_fk) REFERENCES dias(dias_id),
+	materia_fk INT,
+	FOREIGN KEY (materia_fk) REFERENCES materia(materia_ID)
+	);
+
+
+CREATE TABLE Dias (
+	dias_id INT PRIMARY KEY AUTO_INCREMENT,
+	nombre VARCHAR(100)
+);
+
+INSERT INTO Dias (nombre) VALUES
+    ('Lunes'),
+    ('Martes'),
+    ('Miércoles'),
+    ('Jueves'),
+    ('Viernes');
+
+
+
 CREATE TABLE Horarios (
-    dias VARCHAR(100) NOT NULL,
     hora_Desde TIME,
     hora_Hasta TIME,
     materia_FK INT,
@@ -33,7 +54,8 @@ CREATE TABLE Alumno (
 );
 
 CREATE TABLE Parciales (
-    parcial_ID INT PRIMARY KEY,
+    parcial_ID INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(100),
     fecha DATE,
     materia_FK INT,
     FOREIGN KEY (materia_FK) REFERENCES Materia(materia_ID)
@@ -71,3 +93,4 @@ CREATE TABLE Asistencia (
     FOREIGN KEY(materia_FK) REFERENCES Materia(materia_ID),
     FOREIGN KEY(alumno_FK) REFERENCES Alumno(alumn_DNI)
 );
+

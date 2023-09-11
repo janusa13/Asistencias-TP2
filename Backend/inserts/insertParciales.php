@@ -3,17 +3,26 @@ require_once("conexion.php");
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $parcial_id = $_POST["id"];
     $fecha = $_POST["fecha"];
-    if ($parcial_id && $fecha  != NULL) {
-        $query = "insert into parciales(id,fecha) 
+    if ($fecha &&  $alumn_dni != NULL) {
+        $check_query = "SELECT COUNT(*) FROM alumno WHERE parcial_id = :parcial_id";
+        $check_stmt = $connect->prepare($check_query);
+        $check_stmt->bindParam(":parcial_id", $parcial_id);
+        $check_stmt->execute();
+        $num_rows = $check_stmt->fetchColumn();
+
+        if ($num_rows == 0) {
+            $query = "insert into parcial(id,fecha) 
             values(:id,:fecha)";
-        $stmt = $connect->prepare($query);
-        $stmt->bindParam("id:", $parcial_id);
-        $stmt->bindParam("fecha:", $fecha);
-        $stmt->execute();
-        print($nombre);
+            $stmt = $connect->prepare($query);
+            $stmt->bindParam(":id", $parcial_id);
+            $stmt->bindParam(":fecha", $fecha);
+
+            $stmt->execute();
+            print($nombre . "agregado correctamente.");
+        } else {
+            print("DATOS YA EXISTENTES");
+        }
     } else {
         print("DATOS VACIOS");
     }
-} else {
-    print("METODO NO VALIDO");
 }
