@@ -1,18 +1,18 @@
 <?php
 require_once("conexion.php");
 if($_SERVER["REQUEST_METHOD"]=="POST"){
-    $alumno_dni=$_POST["DNI"];
+    $alumn_dni=$_POST["alumn_dni"];
     $nombre=$_POST["nombre"];
     $apellido=$_POST["apellido"];
-    $fechaNacimiento=$_POST["fecha_Nacimiento"];
-    if($alumno_dni && $nombre && $apellido && $fechaNacimiento != NULL ){
-        $query="insert into alumnos(alumno_dni,nombre,apellido,fechaNacimiento) 
-            values(:alumno_dni,:nombre,:apellido,:fechaNacimiento)";
+    $fecha_nac=$_POST["fecha_nac"];
+    if($alumn_dni && $nombre && $apellido && $fecha_nac != NULL ){
+        $query="insert into alumno(alumn_dni,nombre,apellido,fecha_nac) 
+            values(:alumn_dni,:nombre,:apellido,:fecha_nac)";
         $stmt=$connect->prepare($query);
-        $stmt->bindParam(":alumno_dni",$alumno_dni);
+        $stmt->bindParam(":alumn_dni",$alumn_dni);
         $stmt->bindParam(":nombre",$nombre);
         $stmt->bindParam(":apellido",$apellido);
-        $stmt->bindParam(":fechaNacimiento",$fechaNacimiento);
+        $stmt->bindParam(":fecha_nac",$fecha_nac);
         $stmt->execute();
         print($nombre);
         
