@@ -1,6 +1,17 @@
 <?php
+require_once('conexion.php');
+
+
+$query='select * from profesores';
+$stmt=$connect -> prepare($query);
+$stmt->execute();
+$usuarios=$stmt->fetchAll();
 
 phpinfo();
+
+
+
+
 /*  un sistemas para tomar asistencias .
     obligatorio: PHP: POO(herencia, encapsulamiento, traits, estaticos)
                 HTML: bootstrap, 
