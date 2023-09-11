@@ -31,7 +31,6 @@ phpinfo();
     Tener pantallas para:
         Agregar alumnos.
         tomar asistencia diarias
-        seleccionar año, division.
         buscar alumno por nombre y apellido.
         mostrar informacion del alumnos (trabajos entregados, parciales, porcentaje de faltas)
         agregar un calendario de clases tenidas y  clases que no se tuvieron y el motivo del porque (falta del profesor o feriado, etc)
