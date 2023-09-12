@@ -12,8 +12,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $num_rows = $check_stmt->fetchColumn();
 
         if ($num_rows == 0) {
-            $query = "insert into materia(materia_ID,nombre,profesor_FK) 
-            values(:materia_ID,:nombre, :profesor_FK)";
+            $query = "insert into materia(materia_ID,nombre,dias,profesor_FK) 
+            values(:materia_ID,:nombre,:dias, :profesor_FK)";
             $stmt = $connect->prepare($query);
             $stmt->bindParam(":materia_ID", $materia_id);
             $stmt->bindParam(":nombre", $nombre);
