@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($num_rows > 0) {
             header("Location: home.html");
         } else {
-            echo "DNI no registrado";
+            echo"DNI no registrado";
         }
     }
 }
