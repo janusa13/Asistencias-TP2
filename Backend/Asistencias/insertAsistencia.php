@@ -12,9 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $check_stmt->execute();
         $num_rows = $check_stmt->fetchColumn();
 
-        if ($num_rows == 0) {
-            $materia_query="SELECT materia_ID FROM materia where materia = nombre"
-            $alumno_query="SELECT alumno_dni FROM alumnos where 
+        if ($num_rows == 0) { 
             $query = "insert into asistencia(fecha,id,DNI,estado) 
             values(:fecha,:id,:DNI,:estado)";
             $stmt = $connect->prepare($query);
