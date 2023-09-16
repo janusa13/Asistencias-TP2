@@ -1,5 +1,5 @@
 <?php
-require_once("conexion.php");
+require_once("Conexion\conexion.php");
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $prof_DNI = $_POST["prof_DNI"];
     
