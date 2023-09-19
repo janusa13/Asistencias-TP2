@@ -25,12 +25,20 @@ if (isset($_POST["nombre"]) && isset($_POST["apellido"])) {
                 <th>Nombre</th>
                 <th>Apellido</th>
                 <th>Fecha de Nacimiento</th>
+                <th>Registrar Asistencia</th>
+                <th>Configuracion</th>
+
             </tr>
             <tr>
                 <td>{$alumno->alumn_DNI}</td>
                 <td>{$alumno->nombre}</td>
                 <td>{$alumno->apellido}</td>
                 <td>{$alumno->fecha_nac}</td>
+                <td>
+                <button>Asistio</button>
+                    <button>No Asistio</button>
+                    
+                </td>
                 <td>
                     <button>Editar</button>
                     <button>Dar de Baja</button>
@@ -39,7 +47,6 @@ if (isset($_POST["nombre"]) && isset($_POST["apellido"])) {
         </table>
         </div>
         ";
-
 } else {
     echo "Nombre y apellido deben estar definidos.";
 }
