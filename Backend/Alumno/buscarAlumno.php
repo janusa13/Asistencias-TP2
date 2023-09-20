@@ -1,7 +1,7 @@
 <?php
 
 require_once("../Conexion/conexion.php");
-require_once("Alumno.php"); 
+require_once("../Alumno/Alumno.php"); 
 
 if (isset($_POST["nombre"]) && isset($_POST["apellido"])) {
     $nombre = $_POST["nombre"];
@@ -51,3 +51,11 @@ if (isset($_POST["nombre"]) && isset($_POST["apellido"])) {
     echo "Nombre y apellido deben estar definidos.";
 }
 ?>
+
+
+
+
+
+
+
+

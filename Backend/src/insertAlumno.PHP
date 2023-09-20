@@ -29,6 +29,43 @@
   </div>
   <button type="submit" class="btn btn-primary" name="btnRegistrar" value="ok">Registrar</button>
 </form>
+  <div class="col -8 p-4">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+            <th scope="col">DNI</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+            <th scope="col">Fecha de Nacimiento</th>
+            <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+      <?php 
+        require_once("..\Conexion\conexion.php");
+        require_once("../Alumno/Alumno.php");
+         $query='SELECT * FROM alumno';
+          $stmt=$connect->prepare($query);
+          $stmt->execute();
+          $alumnos = $stmt->fetchAll();
+          foreach ($alumnos as $alumno_data){  
+            $alumno = new Alumno($alumno_data['alumn_DNI'], $alumno_data['nombre'], $alumno_data['apellido'], $alumno_data['fecha_nac']);
+            ?>
+            <tr>
+              <th scope="row"><?php echo $alumno->alumn_DNI; ?></th>
+              <td><?php echo $alumno->nombre; ?></td>
+              <td><?php echo $alumno->apellido; ?></td>
+              <td><?php echo $alumno->fecha_nac; ?></td>
+              <td>
+                <a class="btn btn-small btn-primary" href="">Editar</a>
+                <a class="btn btn-small btn-danger" href="">Eliminar</a>
+              </td>
+            </tr> 
+          <?php }
+          ?>
+      </tbody>
+    </table>
+  </div>
     </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
   </body>
