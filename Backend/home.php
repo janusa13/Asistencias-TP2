@@ -11,11 +11,11 @@
     />
     <title>T.S.A</title>
   </head>
-  <body>
+  <body class="p-2">
     <h3 class=" text-center p-3">T.S.A</h3>
       <a href="src\insertAlumno.PHP" class="btn btn-small btn-primary">Registrar Alumno</a>
       <a href="src\insertDocente.PHP" class="btn btn-small btn-primary" >Registrar Docente</a>
-    <div class="buscarAlumno">
+    <div class="container-fluid row">
       <form method="POST" action="home.php" class="col-4 p-3">
         <h3 class="text-center text-secondary">Buscar Alumno</h3>
         <div class="mb-3">
@@ -45,7 +45,7 @@
           </button>
         </div>
       </form>
-    <div class="col -8 p-4 container-fluid row">
+    <div class="col -8 p-4">
     <table class="table table-striped">
       <thead>
         <tr>
@@ -87,7 +87,6 @@
           ?>
         </tbody>
       </table>
-            
     </div>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
