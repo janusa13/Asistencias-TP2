@@ -1,19 +1,15 @@
 <?php
-
 require_once("../Conexion/conexion.php");
 require_once("../Alumno/Alumno.php"); 
-
 if (isset($_POST["nombre"]) && isset($_POST["apellido"])) {
     $nombre = $_POST["nombre"];
     $apellido = $_POST["apellido"];
-
     $query = 'SELECT * FROM alumno WHERE nombre = :nombre AND apellido = :apellido';
     $stmt = $connect->prepare($query);
     $stmt->bindParam(':nombre', $nombre);
     $stmt->bindParam(':apellido', $apellido);
     $stmt->execute();
     $alumnos = $stmt->fetchAll();
-
     foreach ($alumnos as $alumno_data) {
         $alumno = new Alumno($alumno_data['alumn_DNI'], $alumno_data['nombre'], $alumno_data['apellido'], $alumno_data['fecha_nac']);
     }
@@ -26,8 +22,7 @@ if (isset($_POST["nombre"]) && isset($_POST["apellido"])) {
                 <th>Apellido</th>
                 <th>Fecha de Nacimiento</th>
                 <th>Registrar Asistencia</th>
-                <th>Configuracion</th>
-
+                <th>Configuracion</th>\
             </tr>
             <tr>
                 <td>{$alumno->alumn_DNI}</td>
