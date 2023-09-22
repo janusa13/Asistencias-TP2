@@ -21,9 +21,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         $stmt->bindParam(":apellido",$apellido);
         $stmt->bindParam(":fecha_nac",$fecha_nac);
         $stmt->execute();
-        print($nombre . "agregado correctamente.");
-        
-        
+        header("location:insertAlumno.php");
     }else{
         print("DATOS YA EXISTENTES");
     }
