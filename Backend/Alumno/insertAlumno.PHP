@@ -57,7 +57,7 @@
               <td><?php echo $alumno->apellido; ?></td>
               <td><?php echo $alumno->fecha_nac; ?></td>
               <td>
-                <a class="btn btn-small btn-primary" href="">Editar</a>
+                <a class="btn btn-small btn-primary" href="edit_alumno.php?alumn_DNI=<?= $alumno->alumn_DNI ?>">Editar</a>
                 <a class="btn btn-small btn-danger" href="">Eliminar</a>
               </td>
             </tr> 

@@ -13,7 +13,7 @@
   </head>
   <body class="p-2">
     <h3 class=" text-center p-3">T.S.A</h3>
-      <a href="src\insertAlumno.PHP" class="btn btn-small btn-primary">Registrar Alumno</a>
+      <a href="Alumno\insertAlumno.PHP" class="btn btn-small btn-primary">Registrar Alumno</a>
       <a href="src\insertDocente.PHP" class="btn btn-small btn-primary" >Registrar Docente</a>
     <div class="container-fluid row">
       <form method="POST" action="home.php" class="col-4 p-3">
