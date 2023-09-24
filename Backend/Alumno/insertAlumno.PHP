@@ -7,7 +7,7 @@
     <title>T.S.A</title>
   </head>
   <body>
-    <h3 class=" text-center p-3">T.S.A</h3>
+    <h3 class=" text-center p-3"><a href="../home.php">T.S.A</a></h3>
      <div class="container-fluid row">
 <form method="POST" action="../Alumno/insertAlumnos.php" class="col-4 p-3">
   <h3 class="text-center text-secondary">Registrar Alumno</h3>

@@ -35,6 +35,14 @@
             id="apellido_alumno"
             name="apellido"
           />
+                  <div class="mb-3">
+          <label for="DNI" class="form-label">DNI</label>
+          <input
+            type="text"
+            class="form-control"
+            id="alumn_DNI"
+            name="apellido"
+          />
           <button
             type="submit"
             class="btn btn-primary"
