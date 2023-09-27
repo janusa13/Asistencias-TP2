@@ -12,11 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $check_stmt->execute();
         $num_rows = $check_stmt->fetchColumn();
 
-<<<<<<< HEAD
         if ($num_rows == 0) {
-=======
-        if ($num_rows == 0) { 
->>>>>>> 4b0ff5b2100cb7aaefd4b6add8345f27e4b81fbb
             $query = "insert into asistencia(fecha,id,DNI,estado) 
             values(:fecha,:id,:DNI,:estado)";
             $stmt = $connect->prepare($query);

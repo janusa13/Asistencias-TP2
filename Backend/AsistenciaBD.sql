@@ -29,7 +29,12 @@ CREATE TABLE Dias (
 	dias_id INT PRIMARY KEY AUTO_INCREMENT,
 	nombre VARCHAR(100)
 );
-
+CREATE TABLE Alumno_cursan_materia(
+    materia_fk INT,
+FOREIGN KEY (materia_FK) REFERENCES materia(materia_ID),
+alumno_fk INT,
+FOREIGN key (alumno_fk) REFERENCES Alumno(alumno_DNI)
+);
 INSERT INTO Dias (nombre) VALUES
     ('Lunes'),
     ('Martes'),
