@@ -41,7 +41,7 @@
             type="text"
             class="form-control"
             id="alumn_DNI"
-            name="apellido"
+            name="alumn_DNI"
           />
           <button
             type="submit"
@@ -68,13 +68,15 @@
         <?php
         require_once('Conexion\conexion.php');
         require_once('Alumno/Alumno.php');
-          if (isset($_POST["nombre"]) && isset($_POST["apellido"])) {
-            $nombre = $_POST["nombre"];
-            $apellido = $_POST["apellido"];
-            $query = 'SELECT * FROM alumno WHERE nombre = :nombre AND apellido = :apellido';
+          if (isset($_POST["nombre"]) && isset($_POST["apellido"]) && isset($_POST["alumn_DNI"])) {
+            $nombre =  '%'.$_POST["nombre"].'%';
+            $apellido = '%'.$_POST["apellido"].'%';
+            $alumn_DNI = $_POST["alumn_DNI"];
+            $query = 'SELECT * FROM alumno WHERE (:nombre = "" OR nombre LIKE :nombre) AND (:apellido = "" OR apellido LIKE :apellido) AND (:alumn_DNI = "" OR alumn_DNI=:alumn_DNI)';
             $stmt = $connect->prepare($query);
             $stmt->bindParam(':nombre', $nombre);
             $stmt->bindParam(':apellido', $apellido);
+            $stmt->bindParam(':alumn_DNI', $alumn_DNI);
             $stmt->execute();
             $alumnos = $stmt->fetchAll();
             foreach ($alumnos as $alumno_data) {
