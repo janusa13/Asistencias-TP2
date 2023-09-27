@@ -15,8 +15,8 @@
     <h3 class=" text-center p-3">N.W.A</h3>
       <a href="Alumno\insertAlumno.PHP" class="btn btn-small btn-primary">Registrar Alumno</a>
       <a href="src\insertDocente.PHP" class="btn btn-small btn-primary" >Registrar Docente</a>
-    <div class="container-fluid row">
-      <form method="POST" action="home.php" class="col-4 p-3">
+    <div class="container-fluid row ">
+      <form method="POST" action="home.php" class="col-4 p-3 ">
         <h3 class="text-center text-secondary">Buscar Alumno</h3>
         <div class="mb-3">
           <label for="nombre_alumno" class="form-label">Nombre</label>
@@ -89,7 +89,6 @@
               <td><?php echo $alumno->fecha_nac; ?></td>
               <td>
                 <a class="btn btn-small btn-primary" href="">Asistio</a>
-                <a class="btn btn-small btn-danger" href="">Falto</a>
               </td>
             </tr> 
           <?php }
@@ -101,7 +100,7 @@
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-      crossorigin="anonymous"
+      crossorigin="anonymous"6
     ></script>
   </body>
 </html>
