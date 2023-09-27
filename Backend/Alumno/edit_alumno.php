@@ -18,7 +18,7 @@ $alumn_DNI=$_GET["alumn_DNI"];
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <body>
-    <h3 class=" text-center p-3">T.S.A</h3>
+    <h3 class=" text-center p-3"><a href="insertAlumno.php">N.W.A</a></h3>
     <form method="POST" class="col-4 p-3 m-auto">
   <h3 class="text-center text-secondary">Editar Alumno</h3>
   <input type="hidden" name="viejo_DNI" value="<?php echo $_GET['alumn_DNI'];?>"/>
