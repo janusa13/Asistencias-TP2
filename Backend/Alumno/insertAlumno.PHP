@@ -42,12 +42,15 @@
       </thead>
       <tbody>
       <?php 
-        require_once("..\Conexion\conexion.php");
+        include("..\Conexion\conexion.php");
         require_once("../Alumno/Alumno.php");
-         $query='SELECT * FROM alumno';
-          $stmt=$connect->prepare($query);
+       try{ $BD = Conexion::connect();
+         $query = 'SELECT * FROM alumno';
+          $stmt=$BD->prepare($query);
           $stmt->execute();
-          $alumnos = $stmt->fetchAll();
+          $result = $stmt->get_result();
+          $stmt->close();
+          $alumnos = $result->fetch_all(MYSQLI_ASSOC);
           foreach ($alumnos as $alumno_data){  
             $alumno = new Alumno($alumno_data['alumn_DNI'], $alumno_data['nombre'], $alumno_data['apellido'], $alumno_data['fecha_nac']);
             ?>
@@ -62,6 +65,10 @@
               </td>
             </tr> 
           <?php }
+          $BD=null;
+       }catch (PDOException $e){
+        die("Error: ".$e->getMessage());
+       }
           ?>
       </tbody>
     </table>
