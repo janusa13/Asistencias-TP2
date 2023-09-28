@@ -69,5 +69,62 @@
             </table>
         </div>
     </div>
+<<<<<<< HEAD
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
+=======
+    <div class="mb-3">
+    <label for="fecha_alumn" class="form-label">Fecha de nacimiento</label>
+    <input type="date" class="form-control" id="fecha_nac" name="fecha_nac">
+  </div>
+  <button type="submit" class="btn btn-primary" name="btnRegistrar" value="ok">Registrar</button>
+</form>
+  <div class="col -8 p-4">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+            <th scope="col">DNI</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+            <th scope="col">Fecha de Nacimiento</th>
+            <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+      <?php 
+        include("..\Conexion\conexion.php");
+        require_once("../Alumno/Alumno.php");
+       try{ $BD = Conexion::connect();
+         $query = 'SELECT * FROM alumno';
+          $stmt=$BD->prepare($query);
+          $stmt->execute();
+          $result = $stmt->get_result();
+          $stmt->close();
+          $alumnos = $result->fetch_all(MYSQLI_ASSOC);
+          foreach ($alumnos as $alumno_data){  
+            $alumno = new Alumno($alumno_data['alumn_DNI'], $alumno_data['nombre'], $alumno_data['apellido'], $alumno_data['fecha_nac']);
+            ?>
+            <tr>
+              <th scope="row"><?php echo $alumno->alumn_DNI; ?></th>
+              <td><?php echo $alumno->nombre; ?></td>
+              <td><?php echo $alumno->apellido; ?></td>
+              <td><?php echo $alumno->fecha_nac; ?></td>
+              <td>
+                <a class="btn btn-small btn-primary" href="edit_alumno.php?alumn_DNI=<?= $alumno->alumn_DNI ?>">Editar</a>
+                <a class="btn btn-small btn-danger" href="">Eliminar</a>
+              </td>
+            </tr> 
+          <?php }
+          $BD=null;
+       }catch (PDOException $e){
+        die("Error: ".$e->getMessage());
+       }
+          ?>
+      </tbody>
+    </table>
+  </div>
+    </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  </body>
+</html>
+>>>>>>> acd67cd29f07901f4fbe2d3932d1a5c125467c40

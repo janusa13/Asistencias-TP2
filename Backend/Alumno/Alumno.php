@@ -12,5 +12,4 @@
             $this->fecha_nac=$fecha_nac;
         }
     }
-
 ?>
