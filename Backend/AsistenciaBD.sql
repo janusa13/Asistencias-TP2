@@ -93,4 +93,3 @@ CREATE TABLE Asistencia (
     FOREIGN KEY(materia_FK) REFERENCES Materia(materia_ID),
     FOREIGN KEY(alumno_FK) REFERENCES Alumno(alumn_DNI)
 );
-

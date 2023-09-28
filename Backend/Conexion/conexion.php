@@ -1,9 +1,20 @@
 <?php
-$host='localhost';
-$dbname='asistencia';
-$username='root';
-$password='root';
+class Conexion 
+{
+    public static function connect()
+    {
+        $mariaDB = new mysqli('localhost', 'root', 'root', 'asistenciadb');
 
-$connect=new PDO('mysql:host=localhost;dbname=asistencia', $username, $password);
+        if ($mariaDB->connect_errno) {
+            echo "<p hidden>Fallo la conexión: " . $mariaDB->connect_error . "</p>";
+            return null; // retorna null en caso de fallo
+        } else {
+            echo "<p hidden>Conexión exitosa</p>";
+            return $mariaDB; // retorna el objeto de conexión en caso de exito
+        }
+    }
+}
 
+// $BD = Conexion::connect()
+// $var (variable que le queres asignar) = mysqli_query ($BD, " aca iria la consulta.");
 ?>
