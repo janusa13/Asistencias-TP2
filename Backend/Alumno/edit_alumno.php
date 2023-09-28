@@ -1,5 +1,5 @@
 <?php
-require_once("../Conexion/conexion.php");
+include("../Conexion/conexion.php");
 require_once("../Alumno/Alumno.php");
 $alumn_DNI=$_GET["alumn_DNI"];
  $query = "SELECT * FROM alumno WHERE alumn_DNI=:alumn_DNI";
