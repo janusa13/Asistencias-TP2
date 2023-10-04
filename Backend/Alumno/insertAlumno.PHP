@@ -61,7 +61,7 @@
               <td><?php echo $alumno->fecha_nac; ?></td>
               <td>
                 <a class="btn btn-small btn-primary" href="edit_alumno.php?alumn_DNI=<?= $alumno->alumn_DNI ?>">Editar</a>
-                <a class="btn btn-small btn-danger" href="">Eliminar</a>
+                <a class="btn btn-small btn-danger" href="deleteAlumno.php?alumn_DNI=<?= $alumno->alumn_DNI ?>">Eliminar</a>
               </td>
             </tr> 
           <?php }
