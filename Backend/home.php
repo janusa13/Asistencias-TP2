@@ -66,19 +66,20 @@
       </thead>
       <tbody>
         <?php
-        require_once('Conexion\conexion.php');
+        include('Conexion\conexion.php');
         require_once('Alumno/Alumno.php');
+        try{ $BD =Conexion::connect();
           if (isset($_POST["nombre"]) && isset($_POST["apellido"]) && isset($_POST["alumn_DNI"])) {
             $nombre =  '%'.$_POST["nombre"].'%';
             $apellido = '%'.$_POST["apellido"].'%';
             $alumn_DNI = $_POST["alumn_DNI"];
-            $query = 'SELECT * FROM alumno WHERE (:nombre = "" OR nombre LIKE :nombre) AND (:apellido = "" OR apellido LIKE :apellido) AND (:alumn_DNI = "" OR alumn_DNI=:alumn_DNI)';
-            $stmt = $connect->prepare($query);
-            $stmt->bindParam(':nombre', $nombre);
-            $stmt->bindParam(':apellido', $apellido);
-            $stmt->bindParam(':alumn_DNI', $alumn_DNI);
+            $query = 'SELECT * FROM alumno WHERE (:nombre = "" OR nombre LIKE :nombre) AND (:apellido = "" OR apellido LIKE :apellido) AND (:alumn_DNI = "" OR alumn_DNI LIKE :alumn_DNI)';
+            $stmt = $BD->prepare($query);
+            $stmt->bind_param('sss', $nombre, $apellido, $alumn_DNI);
             $stmt->execute();
-            $alumnos = $stmt->fetchAll();
+            $result = $stmt->get_result();
+            $stmt->close();
+            $alumnos = $result->fetchAll(MYSQLI_ASSOC);
             foreach ($alumnos as $alumno_data) {
               $alumno = new Alumno($alumno_data['alumn_DNI'], $alumno_data['nombre'], $alumno_data['apellido'], $alumno_data['fecha_nac']);
               ?>
@@ -92,7 +93,10 @@
               </td>
             </tr> 
           <?php }
-          }
+          }$BD=null;
+        }catch(PDOException $e){
+          die("Error: ". $e->getMessage());
+        }
           ?>
         </tbody>
       </table>
