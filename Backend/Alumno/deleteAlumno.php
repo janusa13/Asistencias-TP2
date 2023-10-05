@@ -7,8 +7,9 @@ $deleteForm = mysqli_prepare($BD, $deleteQuery);
 mysqli_stmt_bind_param($deleteForm, "i", $alumn_DNI);
 mysqli_stmt_execute($deleteForm);
 if ($deleteForm) {
-    header("insertAlumno.php");
-}else{
-    echo"no anduvo";
+    header("Location: insertAlumno.php"); 
+    exit; 
+} else {
+    echo "no anduvo";
 }
 ?>
