@@ -62,6 +62,7 @@
                 <th scope="col">Nombre</th>
                 <th scope="col">Apellido</th>
                 <th scope="col">Fecha de Nacimiento</th>
+                <th scope="col">Asistencias</th>
                 <th scope="col"></th>
             </tr>
             </thead>
@@ -102,15 +103,16 @@
                 $result = $stmt->get_result();
                 $alumnos = $result->fetch_all(MYSQLI_ASSOC);
                 foreach ($alumnos as $alumno_data) {
-                    $alumno = new Alumno($alumno_data['alumn_DNI'], $alumno_data['nombre'], $alumno_data['apellido'], $alumno_data['fecha_nac']);
+                    $alumno = new Alumno($alumno_data['alumn_DNI'], $alumno_data['nombre'], $alumno_data['apellido'], $alumno_data['fecha_nac'],$alumno_data['asistencias']);
                     ?>
                     <tr>
                         <th scope="row"><?php echo $alumno->alumn_DNI; ?></th>
                         <td><?php echo $alumno->nombre; ?></td>
                         <td><?php echo $alumno->apellido; ?></td>
                         <td><?php echo $alumno->fecha_nac; ?></td>
+                        <td><?php echo $alumno->asistencias; ?></td>
                         <td>
-                            <a class="btn btn-small btn-primary" href="">Asistio</a>
+                            <a class="btn btn-small btn-primary" href="Alumno/Asistencia.php?alumn_DNI=<?= $alumno->alumn_DNI ?>">Asistio</a>
                         </td>
                     </tr>
                     <?php
