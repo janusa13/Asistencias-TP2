@@ -24,13 +24,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $stmt->execute();
                 header("location:insertAlumno.php");
             } else {
-                $msg_err="DATOS YA EXISTENTES";
+                $msg_err="Datos ya existentes";
             }
         } else {
-            $msg_err="CAMPOS VACIOS";
+            $msg_err="Campos vacios";
         }
     } catch (Exception $e) {
-        $msg_err="DATOS DEL DNI INVALIDOS";
+        $msg_err="Datos del DNI no validos";
     }
 }
 ?>
@@ -48,12 +48,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <form method="POST" action="insertAlumno.php" class="col-4 p-3">
   <h3 class="text-center text-secondary">Registrar Alumno</h3>
   <?php
-if($msg_err=="DATOS YA EXISTENTES"){
-  echo "<div class='alert alert-warning'>DATOS EXISTENTES</div>";
-}else if($msg_err=="CAMPOS VACIOS"){
-  echo "<div class='alert alert-warning'>CAMPOS VACIOS</div>";
-}elseif ($msg_err=="DATOS DEL DNI INVALIDOS") {
-  echo "<div class='alert alert-warning'>DATOS DEL DNI INVALIDOS</div>";
+if($msg_err=="Datos ya existentes"){
+  echo "<div class='alert alert-warning'>Datos ya existentes</div>";
+}else if($msg_err=="Campos vacios"){
+  echo "<div class='alert alert-warning'>Campos vacios</div>";
+}elseif ($msg_err=="Datos del DNI no validos") {
+  echo "<div class='alert alert-warning'>Datos del DNI no validos</div>";
 }
 
   ?>

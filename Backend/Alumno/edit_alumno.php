@@ -50,7 +50,6 @@ try {
   </div>
   <button type="submit" class="btn btn-primary" name="btnRegistrar" value="ok">Editar Alumno</button>
   <?php
-require_once("../Conexion/conexion.php");
 if (!empty($_POST["btnRegistrar"])) {
     if (!empty($_POST["alumn_DNI"]) && !empty($_POST["nombre"]) && !empty($_POST["apellido"]) && !empty($_POST["fecha_nac"])) {
         $viejo_DNI=$_POST["viejo_DNI"];
@@ -67,7 +66,7 @@ if (!empty($_POST["btnRegistrar"])) {
                 header("location:insertAlumno.php");
             }
         } catch (mysqli_sql_exception $e) {
-    die("Error: " . $e->getMessage());
+    echo "<div class='alert alert-warning'>Datos del DNI invalidos</div>";
     }
     }else{
       echo "<div class='alert alert-warning'>Campos vacios</div>";
