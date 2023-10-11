@@ -16,7 +16,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $check_stmt->bind_result($num_rows);
             $check_stmt->fetch();
             $check_stmt->close();
-
             if ($num_rows == 0) {
                 $query = "INSERT INTO alumno(alumn_DNI, nombre, apellido, fecha_nac) 
                 VALUES (?, ?, ?, ?)";
@@ -31,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $msg_err="CAMPOS VACIOS";
         }
     } catch (Exception $e) {
-        print("Error: " . $e->getMessage());
+        $msg_err="DATOS DEL DNI INVALIDOS";
     }
 }
 ?>
@@ -53,6 +52,8 @@ if($msg_err=="DATOS YA EXISTENTES"){
   echo "<div class='alert alert-warning'>DATOS EXISTENTES</div>";
 }else if($msg_err=="CAMPOS VACIOS"){
   echo "<div class='alert alert-warning'>CAMPOS VACIOS</div>";
+}elseif ($msg_err=="DATOS DEL DNI INVALIDOS") {
+  echo "<div class='alert alert-warning'>DATOS DEL DNI INVALIDOS</div>";
 }
 
   ?>
