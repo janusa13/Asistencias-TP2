@@ -1,3 +1,39 @@
+<?php
+include("../Conexion/conexion.php");
+$msg_err="";
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    try {
+        $BD = Conexion::connect();
+        $alumn_DNI = $_POST["alumn_DNI"];
+        $nombre = $_POST["nombre"];
+        $apellido = $_POST["apellido"];
+        $fecha_nac = $_POST["fecha_nac"];
+        if ($alumn_DNI && $nombre && $apellido && $fecha_nac != NULL) {
+            $check_query = "SELECT COUNT(*) FROM alumno WHERE alumn_DNI = ?";
+            $check_stmt = $BD->prepare($check_query);
+            $check_stmt->bind_param("s", $alumn_DNI);
+            $check_stmt->execute();
+            $check_stmt->bind_result($num_rows);
+            $check_stmt->fetch();
+            $check_stmt->close();
+            if ($num_rows == 0) {
+                $query = "INSERT INTO alumno(alumn_DNI, nombre, apellido, fecha_nac) 
+                VALUES (?, ?, ?, ?)";
+                $stmt = $BD->prepare($query);
+                $stmt->bind_param("ssss", $alumn_DNI, $nombre, $apellido, $fecha_nac); 
+                $stmt->execute();
+                header("location:insertAlumno.php");
+            } else {
+                $msg_err="Datos ya existentes";
+            }
+        } else {
+            $msg_err="Campos vacios";
+        }
+    } catch (Exception $e) {
+        $msg_err="Datos del DNI no validos";
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="esp">
   <head>
@@ -8,9 +44,19 @@
   </head>
   <body>
     <h3 class=" text-center p-3"><a href="../home.php">N.W.A</a></h3>
-     <div class="container-fluid row">
-<form method="POST" action="../Alumno/insertAlumnos.php" class="col-4 p-3">
+    <div class="container-fluid row">
+<form method="POST" action="insertAlumno.php" class="col-4 p-3">
   <h3 class="text-center text-secondary">Registrar Alumno</h3>
+  <?php
+if($msg_err=="Datos ya existentes"){
+  echo "<div class='alert alert-warning'>Datos ya existentes</div>";
+}else if($msg_err=="Campos vacios"){
+  echo "<div class='alert alert-warning'>Campos vacios</div>";
+}elseif ($msg_err=="Datos del DNI no validos") {
+  echo "<div class='alert alert-warning'>Datos del DNI no validos</div>";
+}
+
+  ?>
   <div class="mb-3">
     <label for="alumn_dni" class="form-label">DNI</label>
     <input type="text" class="form-control" name="alumn_DNI" id="alumn_dni" aria-describedby="dni_alumno">
@@ -33,7 +79,7 @@
     <table class="table table-striped">
       <thead>
         <tr>
-            <th scope="col">DNI</th>
+        <th scope="col">DNI</th>
             <th scope="col">Nombre</th>
             <th scope="col">Apellido</th>
             <th scope="col">Fecha de Nacimiento</th>
@@ -42,14 +88,16 @@
       </thead>
       <tbody>
       <?php 
-        require_once("..\Conexion\conexion.php");
         require_once("../Alumno/Alumno.php");
-         $query='SELECT * FROM alumno';
-          $stmt=$connect->prepare($query);
+      try{ $BD = Conexion::connect();
+         $query = 'SELECT * FROM alumno';
+          $stmt=$BD->prepare($query);
           $stmt->execute();
-          $alumnos = $stmt->fetchAll();
-          foreach ($alumnos as $alumno_data){  
-            $alumno = new Alumno($alumno_data['alumn_DNI'], $alumno_data['nombre'], $alumno_data['apellido'], $alumno_data['fecha_nac']);
+          $result = $stmt->get_result();
+          $stmt->close();
+          $alumnos = $result->fetch_all(MYSQLI_ASSOC);
+          foreach ($alumnos as $alumno_data){
+            $alumno = new Alumno($alumno_data['alumn_DNI'], $alumno_data['nombre'], $alumno_data['apellido'], $alumno_data['fecha_nac'], $alumno_data['asistencias']);
             ?>
             <tr>
               <th scope="row"><?php echo $alumno->alumn_DNI; ?></th>
@@ -58,10 +106,21 @@
               <td><?php echo $alumno->fecha_nac; ?></td>
               <td>
                 <a class="btn btn-small btn-primary" href="edit_alumno.php?alumn_DNI=<?= $alumno->alumn_DNI ?>">Editar</a>
-                <a class="btn btn-small btn-danger" href="">Eliminar</a>
+                <a class="btn btn-small btn-danger" onclick="confirmarEliminacion(<?= $alumno->alumn_DNI ?>)">Eliminar</a>
               </td>
+              <script>
+                function confirmarEliminacion(alumn_DNI) {
+                  if (confirm("¿Seguro que deseas eliminar este alumno?")) {
+                    window.location.href = "deleteAlumno.php?alumn_DNI=" + alumn_DNI;
+                  }
+                }
+              </script>
             </tr> 
           <?php }
+          $BD=null;
+      }catch (PDOException $e){
+        die("Error: ".$e->getMessage());
+      }
           ?>
       </tbody>
     </table>

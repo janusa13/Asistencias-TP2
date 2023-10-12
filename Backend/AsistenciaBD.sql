@@ -29,12 +29,7 @@ CREATE TABLE Dias (
 	dias_id INT PRIMARY KEY AUTO_INCREMENT,
 	nombre VARCHAR(100)
 );
-CREATE TABLE Alumno_cursan_materia(
-    materia_fk INT,
-FOREIGN KEY (materia_FK) REFERENCES materia(materia_ID),
-alumno_fk INT,
-FOREIGN key (alumno_fk) REFERENCES Alumno(alumno_DNI)
-);
+
 INSERT INTO Dias (nombre) VALUES
     ('Lunes'),
     ('Martes'),
@@ -55,6 +50,7 @@ CREATE TABLE Alumno (
     alumn_DNI INT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
     apellido VARCHAR(100) NOT NULL,
+    asistencias INT DEFAULT 0,
     fecha_nac DATE
 );
 
@@ -91,11 +87,9 @@ CREATE TABLE realiza_Trabajo (
 );
 
 CREATE TABLE Asistencia (
-    fecha DATE,
-    estado VARCHAR(50) NOT NULL,
     materia_FK INT,
     alumno_FK INT,
+    asistencias INT DEFAULT 0,
     FOREIGN KEY(materia_FK) REFERENCES Materia(materia_ID),
     FOREIGN KEY(alumno_FK) REFERENCES Alumno(alumn_DNI)
 );
-
