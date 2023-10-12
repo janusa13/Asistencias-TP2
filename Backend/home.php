@@ -14,7 +14,8 @@
 <body class="p-2">
 <h3 class=" text-center p-3">N.W.A</h3>
 <a href="Alumno\insertAlumno.PHP" class="btn btn-small btn-primary">Opciones de Alumnos</a>
-<a href="src\insertDocente.PHP" class="btn btn-small btn-primary">Registrar Docente</a>
+<a href="src/insertDocente.PHP" class="btn btn-small btn-primary">Registrar Docente</a>
+<a href="Materias/insertMateria.php" class="btn btn-small btn-primary">Registrar Materia</a>
 <a href="Asistencias\clases.PHP" class="btn btn-small btn-primary">Opciones de clases</a>
 <div class="container-fluid row ">
     <form method="POST" action="home.php" class="col-4 p-3 ">
@@ -104,7 +105,7 @@
                 $result = $stmt->get_result();
                 $alumnos = $result->fetch_all(MYSQLI_ASSOC);
                 foreach ($alumnos as $alumno_data) {
-                    $alumno = new Alumno($alumno_data['alumn_DNI'], $alumno_data['nombre'], $alumno_data['apellido'], $alumno_data['fecha_nac'],$alumno_data['asistencias']);
+                    $alumno = new Alumno($alumno_data['alumn_DNI'], $alumno_data['nombre'], $alumno_data['apellido'], $alumno_data['fecha_nac'],$alumno_data['asistencias'], $alumno_data['materia_nombre']);
                     ?>
                     <tr>
                         <th scope="row"><?php echo $alumno->alumn_DNI; ?></th>
@@ -134,4 +135,3 @@
 ></script>
 </body>
 </html>
-

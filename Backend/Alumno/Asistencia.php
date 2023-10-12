@@ -12,9 +12,7 @@ try {
     $result = $stmtSelect->get_result();
     $row = $result->fetch_assoc();
     $asistencias = $row["asistencias"];
-
     $asistencias += 1;
-    
     $queryUpdate = 'UPDATE alumno SET asistencias = ? WHERE alumn_DNI = ?'; 
     $stmtUpdate = $BD->prepare($queryUpdate);
     $stmtUpdate->bind_param("ii", $asistencias, $alumn_DNI);

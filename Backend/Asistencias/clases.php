@@ -12,20 +12,19 @@
     <title>Opcion de clases</title>
 </head>
 <body>
-    <a href="../home.php" class=" text-center p-3">N.W.A</h3>
-    <form method="POST" action="clases.php" class="col-4 p-3 ">
-        <h3 class="text-center text-secondary">Opciones de Clases</h3>
-        <div class="mb-3">
-            <label for="CantidadClases" class="form-label">Insertar cantidad total de clases</label>
-            <input
-                    type="text"
-                    class="form-control"
-                    id="cantidadClases"
-                    name="Clases"
-            />
-        </div>
-        <button type="submit" class="btn btn-primary" name="btnRegistrar" value="ok"> Ingresar Dias</button>
-    <form/>
+    <a href="../home.php" class=" text-center p-3">N.W.A</a>
+<form method="POST" action="clases.php" class="col-4 p-3">
+    <h3 class="text-center text-secondary">Opciones de Clases</h3>
+    <div class="mb-3">
+        <label for="cantidadClases" class="form-label">Insertar cantidad total de clases</label>
+        <input type="text" class="form-control" id="cantidadClases" name="cantidadClases" />
+         <label for="cantidadClases" class="form-label">Insertar Materia</label>
+        <input type="text" class="form-control" id="cantidadClases" name="nombre"/>
+        <label for="profesor_FK" class="form-label">Insertar DNI</label>
+        <input type="text" class="form-control" id="profesor_FK" name="profesor_FK" />
+    </div>
+    <button type="submit" class="btn btn-primary" name="btnRegistrar" value="ok">Ingresar Dias</button>
+</form>
     <hr/>
         <form method="POST" action="clases.php" class="col-4 p-3 ">
         <div class="mb-3">
@@ -39,26 +38,31 @@
         </div>
         <button type="submit" class="btn btn-primary" name="btnRegistrar" value="ok"> Buscar</button>
     <form/>
-    <?php
-        include("../Conexion/conexion.php");
-        if($_SERVER["REQUEST_METHOD"]=="POST"){
-            try{
-                $BD=Conexion::connect();
-                $cantidadClases=$_POST["cantidadClases"];
-                if($cantidadClases !=NULL){
-                    $query="INSERT INTO Profesor(cantidadClases) VALUES(?)";
-                    $stmt=$BD->prepare($query);
-                    $stmt->bind_param("i",$cantidadClases);
-                    $stmt->execute();
-                    header("location:clases.php");
-                }else{
-                    echo"Datos vacios";
-                }
-            }catch(Exception $e){
-                echo"Error $e";
-            }
+<?php
+include("../Conexion/conexion.php");
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    try {
+        $BD = Conexion::connect();
+        $cantidadClases = $_POST["cantidadClases"];
+        $nombre = $_POST["nombre"];
+
+        if ($cantidadClases !== NULL) {
+            $query = "UPDATE materia SET cantidadClases=? WHERE nombre=?";
+            $stmt = $BD->prepare($query);
+            $stmt->bind_param("is", $cantidadClases, $nombre);
+            $stmt->execute();
+            header("location:clases.php");
+        } else {
+            echo "Datos vacíos";
         }
-    ?>
+    } catch (Exception $e) {
+        echo "Error: " . $e->getMessage();
+    }
+}
+?>
+
+
 
 <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
