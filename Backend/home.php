@@ -66,6 +66,7 @@
                 <th scope="col">Nombre</th>
                 <th scope="col">Apellido</th>
                 <th scope="col">Fecha de Nacimiento</th>
+                <th scope="col">Asistencias</th>
                 <th scope="col"></th>
             </tr>
             </thead>

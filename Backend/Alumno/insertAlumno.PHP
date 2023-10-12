@@ -106,11 +106,7 @@ if($msg_err=="Datos ya existentes"){
               <td><?php echo $alumno->fecha_nac; ?></td>
               <td>
                 <a class="btn btn-small btn-primary" href="edit_alumno.php?alumn_DNI=<?= $alumno->alumn_DNI ?>">Editar</a>
-<<<<<<< HEAD
                 <a class="btn btn-small btn-danger" href="deleteAlumno.php?alumn_DNI=<?= $alumno->alumn_DNI ?>"onclick="confirmarEliminacion(<?= $alumno->alumn_DNI ?>)">Eliminar</a>
-=======
-                <a class="btn btn-small btn-danger" onclick="confirmarEliminacion(<?= $alumno->alumn_DNI ?>)">Eliminar</a>
->>>>>>> 0558a56845353c8ab2d1432a6c758cf988005995
               </td>
               <script>
                 function confirmarEliminacion(alumn_DNI) {
