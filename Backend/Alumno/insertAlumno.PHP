@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   </head>
   <body>
     <h3 class=" text-center p-3"><a href="../home.php">N.W.A</a></h3>
-     <div class="container-fluid row">
+    <div class="container-fluid row">
 <form method="POST" action="insertAlumno.php" class="col-4 p-3">
   <h3 class="text-center text-secondary">Registrar Alumno</h3>
   <?php
@@ -89,7 +89,7 @@ if($msg_err=="Datos ya existentes"){
       <tbody>
       <?php 
         require_once("../Alumno/Alumno.php");
-       try{ $BD = Conexion::connect();
+      try{ $BD = Conexion::connect();
          $query = 'SELECT * FROM alumno';
           $stmt=$BD->prepare($query);
           $stmt->execute();
@@ -118,9 +118,9 @@ if($msg_err=="Datos ya existentes"){
             </tr> 
           <?php }
           $BD=null;
-       }catch (PDOException $e){
+      }catch (PDOException $e){
         die("Error: ".$e->getMessage());
-       }
+      }
           ?>
       </tbody>
     </table>
