@@ -29,9 +29,8 @@ try {
   <h3 class="text-center text-secondary">Editar Alumno</h3>
   <input type="hidden" name="viejo_DNI" value="<?php echo $_GET['alumn_DNI'];?>"/>
   <?php
-    include "modificarAlumno.php";
     foreach($alumnos as $alumno_data){
-    $alumno = new Alumno($alumno_data['alumn_DNI'], $alumno_data['nombre'], $alumno_data['apellido'], $alumno_data['fecha_nac']);
+    $alumno = new Alumno($alumno_data['alumn_DNI'], $alumno_data['nombre'], $alumno_data['apellido'], $alumno_data['fecha_nac'], $alumno_data['asistencias']);
     ?>
     <div class="mb-3">
     <label for="alumn_dni" class="form-label">DNI</label>
@@ -50,9 +49,32 @@ try {
     <input type="date" class="form-control" id="fecha_nac" name="fecha_nac" value="<?php echo $alumno->fecha_nac;?>">
   </div>
   <button type="submit" class="btn btn-primary" name="btnRegistrar" value="ok">Editar Alumno</button>
+  <?php
+if (!empty($_POST["btnRegistrar"])) {
+    if (!empty($_POST["alumn_DNI"]) && !empty($_POST["nombre"]) && !empty($_POST["apellido"]) && !empty($_POST["fecha_nac"])) {
+        $viejo_DNI=$_POST["viejo_DNI"];
+        $alumn_DNI = $_POST["alumn_DNI"];
+        $nombre = $_POST["nombre"];
+        $apellido = $_POST["apellido"];
+        $fecha_nac = $_POST["fecha_nac"];
+        try{$BD = Conexion::connect();
+            $edit_query = "UPDATE alumno SET alumn_DNI = ?, nombre = ?, apellido = ?, fecha_nac = ? WHERE alumn_DNI = ?";
+            $edit_stmt = $BD->prepare($edit_query);
+            $edit_stmt->bind_param("ssssi", $alumn_DNI, $nombre, $apellido, $fecha_nac, $viejo_DNI);
+            $edit_stmt->execute();
+            if ($edit_stmt->execute()){
+                header("location:insertAlumno.php");
+            }
+        } catch (mysqli_sql_exception $e) {
+    echo "<div class='alert alert-warning'>Datos del DNI invalidos</div>";
+    }
+    }else{
+      echo "<div class='alert alert-warning'>Campos vacios</div>";
+    }
+}
+?>
    <?php }
   ?>
-
 </form>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
