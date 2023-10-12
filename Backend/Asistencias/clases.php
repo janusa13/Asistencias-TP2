@@ -12,7 +12,7 @@
     <title>Opcion de clases</title>
 </head>
 <body>
-    <h3 class=" text-center p-3">N.W.A</h3>
+    <a href="../home.php" class=" text-center p-3">N.W.A</h3>
     <form method="POST" action="clases.php" class="col-4 p-3 ">
         <h3 class="text-center text-secondary">Opciones de Clases</h3>
         <div class="mb-3">
