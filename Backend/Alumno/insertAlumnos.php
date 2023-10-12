@@ -1,5 +1,6 @@
 <?php
 include("../Conexion/conexion.php");
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
         $BD = Conexion::connect();

@@ -29,7 +29,12 @@ CREATE TABLE Dias (
 	dias_id INT PRIMARY KEY AUTO_INCREMENT,
 	nombre VARCHAR(100)
 );
-
+CREATE TABLE Alumno_cursan_materia(
+    materia_fk INT,
+FOREIGN KEY (materia_FK) REFERENCES materia(materia_ID),
+alumno_fk INT,
+FOREIGN key (alumno_fk) REFERENCES Alumno(alumno_DNI)
+);
 INSERT INTO Dias (nombre) VALUES
     ('Lunes'),
     ('Martes'),
@@ -52,6 +57,12 @@ CREATE TABLE Alumno (
     apellido VARCHAR(100) NOT NULL,
     fecha_nac DATE
 );
+
+CREATE TABLE Alumno_Materia(
+	alumno_FK INT,
+	materia_FK INT,
+	FOREIGN KEY (ALUMNO_FK) REFERENCES Alumno(alumn_DNI)
+	FOREIGN KEY (materia_FK) REFERENCES Materia(materia_ID)
 
 CREATE TABLE Parciales (
     parcial_ID INT PRIMARY KEY AUTO_INCREMENT,

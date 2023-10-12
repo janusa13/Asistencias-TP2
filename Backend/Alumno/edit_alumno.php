@@ -1,12 +1,18 @@
 <?php
 include("../Conexion/conexion.php");
 require_once("../Alumno/Alumno.php");
-$alumn_DNI=$_GET["alumn_DNI"];
- $query = "SELECT * FROM alumno WHERE alumn_DNI=:alumn_DNI";
-    $stmt = $connect->prepare($query);
-    $stmt->bindParam(':alumn_DNI', $alumn_DNI);
+$alumn_DNI = $_GET["alumn_DNI"];
+try {
+    $BD = Conexion::connect();
+    $query = "SELECT * FROM alumno WHERE alumn_DNI=?";
+    $stmt = $BD->prepare($query);
+    $stmt->bind_param('i', $alumn_DNI);
     $stmt->execute();
-    $alumnos = $stmt->fetchAll();
+    $result = $stmt->get_result();
+    $alumnos = $result->fetch_all(MYSQLI_ASSOC);
+} catch (mysqli_sql_exception $e) {
+    die("Error: " . $e->getMessage());
+}
 ?>
 
 <!DOCTYPE html>

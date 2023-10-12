@@ -61,8 +61,15 @@
               <td><?php echo $alumno->fecha_nac; ?></td>
               <td>
                 <a class="btn btn-small btn-primary" href="edit_alumno.php?alumn_DNI=<?= $alumno->alumn_DNI ?>">Editar</a>
-                <a class="btn btn-small btn-danger" href="deleteAlumno.php?alumn_DNI=<?= $alumno->alumn_DNI ?>">Eliminar</a>
+                <a class="btn btn-small btn-danger" href="deleteAlumno.php?alumn_DNI=<?= $alumno->alumn_DNI ?>"onclick="confirmarEliminacion(<?= $alumno->alumn_DNI ?>)">Eliminar</a>
               </td>
+              <script>
+                function confirmarEliminacion(alumn_DNI) {
+                  if (confirm("¿Seguro que deseas eliminar este alumno?")) {
+                    window.location.href = "deleteAlumno.php?alumn_DNI=" + alumn_DNI;
+                  }
+                }
+              </script>
             </tr> 
           <?php }
           $BD=null;
