@@ -54,7 +54,9 @@
                 }else{
                     echo"Datos vacios";
                 }
-            }catch(Exception $e){echo "Error";}
+            }catch(Exception $e){
+                echo"Error $e";
+            }
         }
     ?>
 
