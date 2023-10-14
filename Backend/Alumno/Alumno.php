@@ -14,6 +14,9 @@
             $this->fecha_nac=$fecha_nac;
             $this->asistencias=$asistencias;
             $this->materia_nombre=$materia_nombre;
+            if(isset($materia_nombre)){
+                $materia_nombre="No registrado";
+            }
         }
     }
 ?>

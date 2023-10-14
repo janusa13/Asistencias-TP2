@@ -44,9 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                   header("location:insertAlumno.php");
               }else{
                 $msg_err="Materia no encontrada";
-              }
-
-                
+              }                
             } else {
                 $msg_err="Datos ya existentes";
             }
@@ -120,42 +118,42 @@ if($msg_err=="Datos ya existentes"){
       <tbody>
       <?php 
         require_once("../Alumno/Alumno.php");
-      try{ $BD = Conexion::connect();
-         $query = 'SELECT Alumno.*, Materia.nombre AS materia_nombre FROM alumno_materia 
-              INNER JOIN Alumno ON alumno_materia.alumno_fk = Alumno.alumn_DNI 
-              INNER JOIN Materia ON alumno_materia.materia_fk = Materia.materia_ID';
+        try{ $BD = Conexion::connect();
+          $query = 'SELECT Alumno.*, Materia.nombre AS materia_nombre FROM Alumno 
+          LEFT JOIN alumno_materia ON alumno_materia.alumno_fk = Alumno.alumn_DNI 
+          LEFT JOIN Materia ON alumno_materia.materia_fk = Materia.materia_ID';
           $stmt=$BD->prepare($query);
           $stmt->execute();
           $result = $stmt->get_result();
           $stmt->close();
           $alumnos = $result->fetch_all(MYSQLI_ASSOC);
           foreach ($alumnos as $alumno_data){
-            $alumno = new Alumno($alumno_data['alumn_DNI'], $alumno_data['nombre'], $alumno_data['apellido'], $alumno_data['fecha_nac'], $alumno_data['asistencias'], $alumno_data['materia_nombre']);
-            ?>
-            <tr>
-              <th scope="row"><?php echo $alumno->alumn_DNI; ?></th>
-              <td><?php echo $alumno->nombre; ?></td>
-              <td><?php echo $alumno->apellido; ?></td>
-              <td><?php echo $alumno->fecha_nac; ?></td>
-              <td><?php echo $alumno->materia_nombre; ?></td>
-              <td>
+          $alumno = new Alumno($alumno_data['alumn_DNI'], $alumno_data['nombre'], $alumno_data['apellido'], $alumno_data['fecha_nac'], $alumno_data['asistencias'], $alumno_data['materia_nombre']);
+          ?>
+          <tr>
+            <th scope="row"><?php echo $alumno->alumn_DNI; ?></th>
+            <td><?php echo $alumno->nombre; ?></td>
+            <td><?php echo $alumno->apellido; ?></td>
+            <td><?php echo $alumno->fecha_nac; ?></td>
+            <td><?php echo isset($alumno->materia_nombre) ? $alumno->materia_nombre : 'Sin Materia'; ?></td>
+            <td>
                 <a class="btn btn-small btn-primary" href="edit_alumno.php?alumn_DNI=<?= $alumno->alumn_DNI ?>">Editar</a>
                 <a class="btn btn-small btn-danger" onclick="confirmarEliminacion(<?= $alumno->alumn_DNI ?>)">Eliminar</a>
-              </td>
-              <script>
-                function confirmarEliminacion(alumn_DNI) {
-                  if (confirm("¿Seguro que deseas eliminar este alumno?")) {
-                    window.location.href = "deleteAlumno.php?alumn_DNI=" + alumn_DNI;
+            </td>
+            <script>
+              function confirmarEliminacion(alumn_DNI) {
+                if (confirm("¿Seguro que deseas eliminar este alumno?")) {
+                  window.location.href = "deleteAlumno.php?alumn_DNI=" + alumn_DNI;
                   }
                 }
               </script>
-            </tr> 
+          </tr> 
           <?php }
           $BD=null;
       }catch (PDOException $e){
         die("Error: ".$e->getMessage());
       }
-          ?>
+        ?>
       </tbody>
     </table>
   </div>

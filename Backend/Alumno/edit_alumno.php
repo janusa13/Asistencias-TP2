@@ -4,15 +4,22 @@ require_once("../Alumno/Alumno.php");
 $alumn_DNI = $_GET["alumn_DNI"];
 try {
     $BD = Conexion::connect();
-    $query = "SELECT * FROM alumno WHERE alumn_DNI=?";
+    $query = "SELECT * FROM alumno  WHERE alumn_DNI=?";
     $stmt = $BD->prepare($query);
     $stmt->bind_param('i', $alumn_DNI);
     $stmt->execute();
     $result = $stmt->get_result();
     $alumnos = $result->fetch_all(MYSQLI_ASSOC);
+
+  $query_materias = "SELECT * FROM Materia";
+  $stmt_materias = $BD->prepare($query_materias);
+  $stmt_materias->execute();
+  $materias = $stmt_materias->get_result()->fetch_all(MYSQLI_ASSOC);
+  $stmt_materias->close();
 } catch (mysqli_sql_exception $e) {
     die("Error: " . $e->getMessage());
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -30,7 +37,7 @@ try {
   <input type="hidden" name="viejo_DNI" value="<?php echo $_GET['alumn_DNI'];?>"/>
   <?php
     foreach($alumnos as $alumno_data){
-    $alumno = new Alumno($alumno_data['alumn_DNI'], $alumno_data['nombre'], $alumno_data['apellido'], $alumno_data['fecha_nac'], $alumno_data['asistencias']);
+    $alumno = new Alumno($alumno_data['alumn_DNI'], $alumno_data['nombre'], $alumno_data['apellido'], $alumno_data['fecha_nac'], $alumno_data['asistencias'],$materias['nombre']);
     ?>
     <div class="mb-3">
     <label for="alumn_dni" class="form-label">DNI</label>
@@ -48,28 +55,60 @@ try {
     <label for="fecha_alumn" class="form-label">Fecha de nacimiento</label>
     <input type="date" class="form-control" id="fecha_nac" name="fecha_nac" value="<?php echo $alumno->fecha_nac;?>">
   </div>
+  <div class="mb-3">
+  <label for="materia" class="form-label">Materia</label>
+  <select class="form-control" id="materia" name="materia_fk">
+    <?php foreach ($materias as $materia) { ?>
+      <option value="<?php echo $materia['materia_ID']; ?>" <?php if ($materia['nombre'] == $alumno->materia_nombre) echo 'selected'; ?>>
+        <?php echo $materia['nombre']; ?>
+      </option>
+    <?php } ?>
+  </select>
+</div>
   <button type="submit" class="btn btn-primary" name="btnRegistrar" value="ok">Editar Alumno</button>
   <?php
 if (!empty($_POST["btnRegistrar"])) {
     if (!empty($_POST["alumn_DNI"]) && !empty($_POST["nombre"]) && !empty($_POST["apellido"]) && !empty($_POST["fecha_nac"])) {
-        $viejo_DNI=$_POST["viejo_DNI"];
+$viejo_DNI = $_POST["viejo_DNI"];
         $alumn_DNI = $_POST["alumn_DNI"];
         $nombre = $_POST["nombre"];
         $apellido = $_POST["apellido"];
         $fecha_nac = $_POST["fecha_nac"];
-        try{$BD = Conexion::connect();
+        $materia_fk = $_POST["materia_fk"];
+        try {
+            $BD = Conexion::connect(); 
+            $check_query = "SELECT COUNT(*) FROM alumno_materia WHERE alumno_fk = ?";
+            $check_stmt = $BD->prepare($check_query);
+            $check_stmt->bind_param('i', $alumn_DNI);
+            $check_stmt->execute();
+            $check_stmt->bind_result($num_rows);
+            $check_stmt->fetch();
+            $check_stmt->close();
+            if ($num_rows == 0) {
+                $query_relacion = "INSERT INTO alumno_materia(alumno_fk, materia_fk) VALUES (?, ?)";
+                $stmt_relacion = $BD->prepare($query_relacion);
+                $stmt_relacion->bind_param("ii", $alumn_DNI, $materia_fk);
+                $stmt_relacion->execute();
+                $stmt_relacion->close();
+            } else {
+                $update_query_relacion = "UPDATE alumno_materia SET materia_fk = ? WHERE alumno_fk = ?";
+                $update_stmt_relacion = $BD->prepare($update_query_relacion);
+                $update_stmt_relacion->bind_param("ii", $materia_fk, $alumn_DNI);
+                $update_stmt_relacion->execute();
+                $update_stmt_relacion->close();
+            }
             $edit_query = "UPDATE alumno SET alumn_DNI = ?, nombre = ?, apellido = ?, fecha_nac = ? WHERE alumn_DNI = ?";
             $edit_stmt = $BD->prepare($edit_query);
             $edit_stmt->bind_param("ssssi", $alumn_DNI, $nombre, $apellido, $fecha_nac, $viejo_DNI);
             $edit_stmt->execute();
-            if ($edit_stmt->execute()){
+            if ($edit_stmt->execute()) {
                 header("location:insertAlumno.php");
             }
         } catch (mysqli_sql_exception $e) {
-    echo "<div class='alert alert-warning'>Datos del DNI invalidos</div>";
-    }
-    }else{
-      echo "<div class='alert alert-warning'>Campos vacios</div>";
+            echo $e;
+        }
+    } else {
+        echo "<div class='alert alert-warning'>Campos vacíos</div>";
     }
 }
 ?>

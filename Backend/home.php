@@ -65,6 +65,7 @@
                 <th scope="col">Apellido</th>
                 <th scope="col">Fecha de Nacimiento</th>
                 <th scope="col">Asistencias</th>
+                <th scope="col">Materia</th>
                 <th scope="col"></th>
             </tr>
             </thead>
@@ -86,13 +87,15 @@
                 if (isset($_POST["alumn_DNI"])) {
                     $alumn_DNI = $_POST["alumn_DNI"];
                 }
-                $query = 'SELECT * FROM alumno WHERE 1';
+                $query = 'SELECT Alumno.*, Materia.nombre AS materia_nombre FROM Alumno 
+                        LEFT JOIN alumno_materia ON alumno_materia.alumno_fk = Alumno.alumn_DNI 
+                        LEFT JOIN Materia ON alumno_materia.materia_fk = Materia.materia_ID WHERE 1';
                 $conditions = array();
                 if (!empty($nombre)) {
-                    $conditions[] = "nombre LIKE '%" . $nombre . "%'";
+                    $conditions[] = "Alumno.nombre LIKE '%" . $nombre . "%'";
                 }
                 if (!empty($apellido)) {
-                    $conditions[] = "apellido LIKE '%" . $apellido . "%'";
+                    $conditions[] = "Alumno.apellido LIKE '%" . $apellido . "%'";
                 }
                 if (!empty($alumn_DNI)) {
                     $conditions[] = "alumn_DNI = '" . $alumn_DNI . "'";
@@ -105,6 +108,7 @@
                 $result = $stmt->get_result();
                 $alumnos = $result->fetch_all(MYSQLI_ASSOC);
                 foreach ($alumnos as $alumno_data) {
+
                     $alumno = new Alumno($alumno_data['alumn_DNI'], $alumno_data['nombre'], $alumno_data['apellido'], $alumno_data['fecha_nac'],$alumno_data['asistencias'], $alumno_data['materia_nombre']);
                     ?>
                     <tr>
@@ -113,6 +117,7 @@
                         <td><?php echo $alumno->apellido; ?></td>
                         <td><?php echo $alumno->fecha_nac; ?></td>
                         <td><?php echo $alumno->asistencias; ?></td>
+                         <td><?php echo isset($alumno->materia_nombre) ? $alumno->materia_nombre : 'Sin Materia'; ?></td>
                         <td>
                             <a class="btn btn-small btn-primary" href="Alumno/Asistencia.php?alumn_DNI=<?= $alumno->alumn_DNI ?>">Asistio</a>
                         </td>
