@@ -1,7 +1,7 @@
 <?php
 require_once("../Alumno/Alumno.php");
 include("../Conexion/conexion.php");
-insertarAlumno();
+$msg_err= insertarAlumno();
 ?>
 <!DOCTYPE html>
 <html lang="esp">
@@ -17,14 +17,15 @@ insertarAlumno();
 <form method="POST" action="insertAlumno.php" class="col-4 p-3">
   <h3 class="text-center text-secondary">Registrar Alumno</h3>
   <?php
-if($msg_err=="Datos ya existentes"){
-  echo "<div class='alert alert-warning'>Datos ya existentes</div>";
-}else if($msg_err=="Campos vacios"){
-  echo "<div class='alert alert-warning'>Campos vacios</div>";
-}elseif ($msg_err=="Datos del DNI no validos") {
-  echo "<div class='alert alert-warning'>Datos del DNI no validos</div>";
+if(!empty($msg_err)){
+  if($msg_err=="Datos ya existentes"){
+    echo "<div class='alert alert-warning'>Datos ya existentes</div>";
+  }else if($msg_err=="Campos vacios"){
+    echo "<div class='alert alert-warning'>Campos vacios</div>";
+  }elseif ($msg_err=="Datos del DNI no validos") {
+    echo "<div class='alert alert-warning'>Datos del DNI no validos</div>";
 }
-
+}
   ?>
   <div class="mb-3">
     <label for="alumn_dni" class="form-label">DNI</label>
@@ -57,21 +58,11 @@ if($msg_err=="Datos ya existentes"){
       </thead>
       <tbody>
       <?php 
-      try{ $BD = Conexion::connect();
-         $query = 'SELECT * FROM alumno';
-          $stmt=$BD->prepare($query);
-          $stmt->execute();
-          $result = $stmt->get_result();
-          $stmt->close();
-          $alumnos = $result->fetch_all(MYSQLI_ASSOC);
+        $alumnos=TraerDatosAlumnos();
           foreach ($alumnos as $alumno_data){
             $alumno = new Alumno($alumno_data['alumn_DNI'], $alumno_data['nombre'], $alumno_data['apellido'], $alumno_data['fecha_nac'], $alumno_data['asistencias']);
             $alumno->mostrarEditarAlumnos($alumno);
           }
-          $BD=null;
-      }catch (PDOException $e){
-        die("Error: ".$e->getMessage());
-      }
           ?>
       </tbody>
     </table>

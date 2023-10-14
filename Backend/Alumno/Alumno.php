@@ -91,4 +91,18 @@
             <?php
         }
     }
+
+    function TraerDatosAlumnos(){
+            try{ $BD = Conexion::connect();
+                $query = 'SELECT * FROM alumno';
+                $stmt=$BD->prepare($query);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $stmt->close();
+                $alumnos = $result->fetch_all(MYSQLI_ASSOC);
+            }catch(PDOException $e){
+                die("Error:".$e->getMessage());
+            }
+        return $alumnos;
+    }
 ?>
