@@ -1,5 +1,8 @@
 <?php
+
     $msg_err="";
+
+    //Funcion que permite agregar alumnos
     function insertarAlumno(){   
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             try {
@@ -50,6 +53,8 @@
             $this->fecha_nac=$fecha_nac;
             $this->asistencias=$asistencias;
         }
+
+        //Funcion que muestra las propiedades de alumno en una tabla
         public function mostrarAlumnos($alumno){?>
             <tr>
                 <th scope="row"><?php echo $alumno->alumn_DNI; ?></th>
@@ -63,6 +68,8 @@
             </tr>
         <?php
         }
+
+        //Funcion que muestra los alumnos, permite editar y eliminar
         public function mostrarEditarAlumnos($alumno){
             ?><tr>
                     <th scope="row"><?php echo $alumno->alumn_DNI; ?></th>
