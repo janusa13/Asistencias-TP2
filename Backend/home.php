@@ -108,26 +108,8 @@
                 $result = $stmt->get_result();
                 $alumnos = $result->fetch_all(MYSQLI_ASSOC);
                 foreach ($alumnos as $alumno_data) {
-<<<<<<< HEAD
-
-                    $alumno = new Alumno($alumno_data['alumn_DNI'], $alumno_data['nombre'], $alumno_data['apellido'], $alumno_data['fecha_nac'],$alumno_data['asistencias'], $alumno_data['materia_nombre']);
-                    ?>
-                    <tr>
-                        <th scope="row"><?php echo $alumno->alumn_DNI; ?></th>
-                        <td><?php echo $alumno->nombre; ?></td>
-                        <td><?php echo $alumno->apellido; ?></td>
-                        <td><?php echo $alumno->fecha_nac; ?></td>
-                        <td><?php echo $alumno->asistencias; ?></td>
-                         <td><?php echo isset($alumno->materia_nombre) ? $alumno->materia_nombre : 'Sin Materia'; ?></td>
-                        <td>
-                            <a class="btn btn-small btn-primary" href="Alumno/Asistencia.php?alumn_DNI=<?= $alumno->alumn_DNI ?>">Asistio</a>
-                        </td>
-                    </tr>
-                    <?php
-=======
                     $alumno = new Alumno($alumno_data['alumn_DNI'], $alumno_data['nombre'], $alumno_data['apellido'], $alumno_data['fecha_nac'],$alumno_data['asistencias']);
                     $alumno->mostrarAlumnos($alumno);
->>>>>>> c0a2ba079a5f3a6425cac266bf51faa9ff576741
                 }
                 $BD = null;
             } catch (PDOException $e) {

@@ -1,65 +1,7 @@
 <?php
 require_once("../Alumno/Alumno.php");
 include("../Conexion/conexion.php");
-<<<<<<< HEAD
-$msg_err="";
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    try {
-        $BD = Conexion::connect();
-        $alumn_DNI = $_POST["alumn_DNI"];
-        $nombre = $_POST["nombre"];
-        $apellido = $_POST["apellido"];
-        $fecha_nac = $_POST["fecha_nac"];
-        $nombre_materia = $_POST["nombre_materia"];
-        if ($alumn_DNI && $nombre && $apellido && $fecha_nac != NULL) {
-            $check_query = "SELECT COUNT(*) FROM alumno WHERE alumn_DNI = ?";
-            $check_stmt = $BD->prepare($check_query);
-            $check_stmt->bind_param("s", $alumn_DNI);
-            $check_stmt->execute();
-            $check_stmt->bind_result($num_rows);
-            $check_stmt->fetch();
-            $check_stmt->close();
-            if ($num_rows == 0) {
-
-              
-                $query_materia = "SELECT materia_ID FROM Materia WHERE nombre = ?";
-                $stmt_materia = $BD->prepare($query_materia);
-                $stmt_materia->bind_param("s", $nombre_materia);
-                $stmt_materia->execute();
-                $stmt_materia->bind_result($materia_ID);
-                $stmt_materia->fetch();
-                $stmt_materia->close();
-              if($materia_ID){
-                $query = "INSERT INTO alumno(alumn_DNI, nombre, apellido, fecha_nac) 
-                VALUES (?, ?, ?, ?)";
-                $stmt = $BD->prepare($query);
-                $stmt->bind_param("ssss", $alumn_DNI, $nombre, $apellido, $fecha_nac); 
-                $stmt->execute();
-                $stmt->close();
-
-                $query_relacion = "INSERT INTO alumno_materia (alumno_fk, materia_fk) VALUES (?, ?)";
-                    $stmt_relacion = $BD->prepare($query_relacion);
-                    $stmt_relacion->bind_param("ii", $alumn_DNI, $materia_ID);
-                    $stmt_relacion->execute();
-                    $stmt_relacion->close();
-
-                  header("location:insertAlumno.php");
-              }else{
-                $msg_err="Materia no encontrada";
-              }                
-            } else {
-                $msg_err="Datos ya existentes";
-            }
-        } else {
-            $msg_err="Campos vacios";
-        }
-    } catch (Exception $e) {
-        $msg_err="Datos del DNI no validos";
-    }
-}
-=======
 insertarAlumno();
->>>>>>> c0a2ba079a5f3a6425cac266bf51faa9ff576741
 ?>
 <!DOCTYPE html>
 <html lang="esp">
@@ -122,49 +64,17 @@ if($msg_err=="Datos ya existentes"){
       </thead>
       <tbody>
       <?php 
-<<<<<<< HEAD
-        require_once("../Alumno/Alumno.php");
-        try{ $BD = Conexion::connect();
-          $query = 'SELECT Alumno.*, Materia.nombre AS materia_nombre FROM Alumno 
-          LEFT JOIN alumno_materia ON alumno_materia.alumno_fk = Alumno.alumn_DNI 
-          LEFT JOIN Materia ON alumno_materia.materia_fk = Materia.materia_ID';
-=======
       try{ $BD = Conexion::connect();
          $query = 'SELECT * FROM alumno';
->>>>>>> c0a2ba079a5f3a6425cac266bf51faa9ff576741
           $stmt=$BD->prepare($query);
           $stmt->execute();
           $result = $stmt->get_result();
           $stmt->close();
           $alumnos = $result->fetch_all(MYSQLI_ASSOC);
           foreach ($alumnos as $alumno_data){
-<<<<<<< HEAD
-          $alumno = new Alumno($alumno_data['alumn_DNI'], $alumno_data['nombre'], $alumno_data['apellido'], $alumno_data['fecha_nac'], $alumno_data['asistencias'], $alumno_data['materia_nombre']);
-          ?>
-          <tr>
-            <th scope="row"><?php echo $alumno->alumn_DNI; ?></th>
-            <td><?php echo $alumno->nombre; ?></td>
-            <td><?php echo $alumno->apellido; ?></td>
-            <td><?php echo $alumno->fecha_nac; ?></td>
-            <td><?php echo isset($alumno->materia_nombre) ? $alumno->materia_nombre : 'Sin Materia'; ?></td>
-            <td>
-                <a class="btn btn-small btn-primary" href="edit_alumno.php?alumn_DNI=<?= $alumno->alumn_DNI ?>">Editar</a>
-                <a class="btn btn-small btn-danger" onclick="confirmarEliminacion(<?= $alumno->alumn_DNI ?>)">Eliminar</a>
-            </td>
-            <script>
-              function confirmarEliminacion(alumn_DNI) {
-                if (confirm("¿Seguro que deseas eliminar este alumno?")) {
-                  window.location.href = "deleteAlumno.php?alumn_DNI=" + alumn_DNI;
-                  }
-                }
-              </script>
-          </tr> 
-          <?php }
-=======
             $alumno = new Alumno($alumno_data['alumn_DNI'], $alumno_data['nombre'], $alumno_data['apellido'], $alumno_data['fecha_nac'], $alumno_data['asistencias']);
             $alumno->mostrarEditarAlumnos($alumno);
           }
->>>>>>> c0a2ba079a5f3a6425cac266bf51faa9ff576741
           $BD=null;
       }catch (PDOException $e){
         die("Error: ".$e->getMessage());
