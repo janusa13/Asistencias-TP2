@@ -108,6 +108,7 @@
                 $result = $stmt->get_result();
                 $alumnos = $result->fetch_all(MYSQLI_ASSOC);
                 foreach ($alumnos as $alumno_data) {
+<<<<<<< HEAD
 
                     $alumno = new Alumno($alumno_data['alumn_DNI'], $alumno_data['nombre'], $alumno_data['apellido'], $alumno_data['fecha_nac'],$alumno_data['asistencias'], $alumno_data['materia_nombre']);
                     ?>
@@ -123,6 +124,10 @@
                         </td>
                     </tr>
                     <?php
+=======
+                    $alumno = new Alumno($alumno_data['alumn_DNI'], $alumno_data['nombre'], $alumno_data['apellido'], $alumno_data['fecha_nac'],$alumno_data['asistencias']);
+                    $alumno->mostrarAlumnos($alumno);
+>>>>>>> c0a2ba079a5f3a6425cac266bf51faa9ff576741
                 }
                 $BD = null;
             } catch (PDOException $e) {

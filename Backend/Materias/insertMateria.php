@@ -31,6 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     catch(Exception $e){
         echo "<div class='alert alert-warning'>Datos del DNI invalidos</div>";
 }
+<<<<<<< HEAD
 }
 ?>
 <!DOCTYPE html>
@@ -65,3 +66,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ></script>
 </body>
 </html>
+=======
+?>
+>>>>>>> c0a2ba079a5f3a6425cac266bf51faa9ff576741

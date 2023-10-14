@@ -1,5 +1,7 @@
 <?php
+require_once("../Alumno/Alumno.php");
 include("../Conexion/conexion.php");
+<<<<<<< HEAD
 $msg_err="";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
@@ -55,6 +57,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $msg_err="Datos del DNI no validos";
     }
 }
+=======
+insertarAlumno();
+>>>>>>> c0a2ba079a5f3a6425cac266bf51faa9ff576741
 ?>
 <!DOCTYPE html>
 <html lang="esp">
@@ -117,17 +122,23 @@ if($msg_err=="Datos ya existentes"){
       </thead>
       <tbody>
       <?php 
+<<<<<<< HEAD
         require_once("../Alumno/Alumno.php");
         try{ $BD = Conexion::connect();
           $query = 'SELECT Alumno.*, Materia.nombre AS materia_nombre FROM Alumno 
           LEFT JOIN alumno_materia ON alumno_materia.alumno_fk = Alumno.alumn_DNI 
           LEFT JOIN Materia ON alumno_materia.materia_fk = Materia.materia_ID';
+=======
+      try{ $BD = Conexion::connect();
+         $query = 'SELECT * FROM alumno';
+>>>>>>> c0a2ba079a5f3a6425cac266bf51faa9ff576741
           $stmt=$BD->prepare($query);
           $stmt->execute();
           $result = $stmt->get_result();
           $stmt->close();
           $alumnos = $result->fetch_all(MYSQLI_ASSOC);
           foreach ($alumnos as $alumno_data){
+<<<<<<< HEAD
           $alumno = new Alumno($alumno_data['alumn_DNI'], $alumno_data['nombre'], $alumno_data['apellido'], $alumno_data['fecha_nac'], $alumno_data['asistencias'], $alumno_data['materia_nombre']);
           ?>
           <tr>
@@ -149,6 +160,11 @@ if($msg_err=="Datos ya existentes"){
               </script>
           </tr> 
           <?php }
+=======
+            $alumno = new Alumno($alumno_data['alumn_DNI'], $alumno_data['nombre'], $alumno_data['apellido'], $alumno_data['fecha_nac'], $alumno_data['asistencias']);
+            $alumno->mostrarEditarAlumnos($alumno);
+          }
+>>>>>>> c0a2ba079a5f3a6425cac266bf51faa9ff576741
           $BD=null;
       }catch (PDOException $e){
         die("Error: ".$e->getMessage());
