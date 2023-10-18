@@ -17,8 +17,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $check_stmt->fetch();
             $check_stmt->close();
             if ($num_rows == 0) {
-                $query = "INSERT INTO parcial(id,nombre,fecha,materia) 
-                VALUES (?,?)";
+                $query = "INSERT INTO Parciales (id,nombre,fecha,materia) 
+                VALUES (?,?,?,?)";
                 $stmt = $BD->prepare($query);
                 $stmt->bind_param("ssss", $parcial_id, $nombre, $fecha, $materia_fk);
                 $stmt->execute();
@@ -62,7 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             ?>
             <div class="mb-3">
                 <label for="parcial_id" class="form-label">id Parcial</label>
-                <input type="text" class="form-control" name="id" id="id" value="">
+                <input type="text" class="form-control" name="parcial_id" id="pacial_id" value="">
                 <div class="mb-3">
                     <label for="nombre" class="form-label">Nombre del Parcial</label>
                     <input type="text" class="form-control" id="nombre" name="nombre">
