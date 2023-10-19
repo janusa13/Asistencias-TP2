@@ -54,7 +54,6 @@
             $this->asistencias=$asistencias;
         }
 
-        //Funcion que muestra las propiedades de alumno en una tabla
         public function mostrarAlumnos($alumno){?>
             <tr>
                 <th scope="row"><?php echo $alumno->alumn_DNI; ?></th>
@@ -68,7 +67,7 @@
             </tr>
         <?php
         }
-
+        
         //Funcion que muestra los alumnos, permite editar y eliminar
         public function mostrarEditarAlumnos($alumno){
             ?><tr>
@@ -91,7 +90,6 @@
             <?php
         }
     }
-
     function TraerDatosAlumnos(){
             try{ $BD = Conexion::connect();
                 $query = 'SELECT * FROM alumno';

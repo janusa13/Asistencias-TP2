@@ -6,6 +6,15 @@ $msg_err= insertarAlumno();
 <!DOCTYPE html>
 <html lang="esp">
   <head>
+        <script>
+        function validarLetras(event) {
+            var key = event.keyCode;
+            
+            if ((key < 65 || key > 90) && (key < 97 || key > 122) && key !== 32) {
+              event.preventDefault(); 
+            }
+        }
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -27,16 +36,17 @@ if(!empty($msg_err)){
 }
 }
   ?>
+
   <div class="mb-3">
     <label for="alumn_dni" class="form-label">DNI</label>
-    <input type="text" class="form-control" name="alumn_DNI" id="alumn_dni" aria-describedby="dni_alumno">
+    <input type="text" class="form-control" placeholder="Solo numeros" name="alumn_DNI" id="alumn_dni" aria-describedby="dni_alumno" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" min="1">
   <div class="mb-3">
     <label for="nombre_alumno" class="form-label">Nombre</label>
-    <input type="text" class="form-control" id="nombre_alumno" name="nombre" >
+    <input type="text" class="form-control" placeholder="Nombre" id="nombre_alumno" name="nombre" onkeypress="validarLetras(event)">
   </div>
     <div class="mb-3">
     <label for="apellido_alumno" class="form-label">Apellido</label>
-    <input type="text" class="form-control" id="apellido_alumno" name="apellido">
+    <input type="text" class="form-control" placeholder="Apellido" id="apellido_alumno" name="apellido" onkeypress="validarLetras(event)">
   </div>
     </div>
     <div class="mb-3">
