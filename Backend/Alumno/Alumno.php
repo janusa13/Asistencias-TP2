@@ -62,7 +62,7 @@
                 <td><?php echo $alumno->apellido; ?></td>
                 <td><?php echo $alumno->fecha_nac; ?></td>
                 <td><?php echo $alumno->asistencias; ?></td>
-                <td><?php echo $alumno->alumnoPorcentaje($alumno); ?></td>
+                <td><?php echo $alumno->alumnoPorcentaje($alumno) . "%"; ?></td>
                 <td>
                     <a class="btn btn-small btn-primary" href="Alumno/Asistencia.php?alumn_DNI=<?= $alumno->alumn_DNI ?>">Asistio</a>
                 </td>
@@ -95,7 +95,8 @@
         {
             try {
                 $BD = Conexion::connect();
-                $query = 'SELECT diasClases, porcentajeLibre, porcentajePromoción FROM profesor WHERE prof_DNI = ?';
+                $prof_DNI=123;
+                $query = 'SELECT diasClases, porcentajeLibre, porcentajePromocion FROM profesor WHERE prof_DNI = ?';
                 $stmt = $BD->prepare($query);
                 $stmt->bind_param("i", $prof_DNI);
                 $stmt->execute();
@@ -104,9 +105,11 @@
                 $profesor = $result->fetch_all(MYSQLI_ASSOC);
     
                 if (!empty($profesor) && isset($profesor[0]['diasClases'])) {
+                    
                     $diasClases = $profesor[0]['diasClases'];
                     $porcentaje = $alumno->asistencias * 100;
                     $porcentaje = $porcentaje / $diasClases;
+                    $porcentaje_entero=intval($porcentaje);
                 } else {
                     $diasClases = 0; // O un valor predeterminado adecuado
                     $porcentaje = 0; // O un valor predeterminado adecuado
@@ -114,7 +117,7 @@
             } catch (PDOException $e) {
                 $e;
             }
-            return $porcentaje;
+            return $porcentaje_entero;
         }
     }
     function TraerDatosAlumnos(){
