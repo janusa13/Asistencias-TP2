@@ -111,9 +111,8 @@
                     $porcentaje = $porcentaje / $diasClases;
                     
                 } else {
-                    $diasClases = 0; // O un valor predeterminado adecuado
-                    $porcentaje = 0; // O un valor predeterminado adecuado
-                }
+                    $diasClases = 0; 
+                    $porcentaje = 0;                 }
             } catch (PDOException $e) {
                 $e;
             }
