@@ -61,7 +61,8 @@
                 <td><?php echo $alumno->apellido; ?></td>
                 <td><?php echo $alumno->fecha_nac; ?></td>
                 <td><?php echo $alumno->asistencias; ?></td>
-                <td>
+                <td><?php echo $alumno->alumnoPorcentaje($alumno) . "%"; ?>
+            </td>
                     <a class="btn btn-small btn-primary" href="Alumno/Asistencia.php?alumn_DNI=<?= $alumno->alumn_DNI ?>">Asistio</a>
                 </td>
             </tr>

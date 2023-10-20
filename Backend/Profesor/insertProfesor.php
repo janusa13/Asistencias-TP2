@@ -33,4 +33,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo $e;
     }
 }
+ function updateDiasProfesor(){
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $BD = Conexion::connect();
+        $prof_DNI = $_POST["prof_DNI"];
+        $cantidadClases = $_POST["diasClases"];
+        $porcentajeLibre = $_POST["porcentajeLibre"];
+        $porcentajePromocion = $_POST["porcentajePromocion"];
+        if ($cantidadClases && $prof_DNI != NULL) {
+            $query = "UPDATE profesor SET diasClases = ?, porcentajeLibre = ?, porcentajePromocion = ? WHERE prof_DNI = ?";
+            $stmt = $BD->prepare($query);
+            $stmt->bind_param("iiii", $cantidadClases, $porcentajeLibre, $porcentajePromocion, $prof_DNI);
+            $stmt->execute();
+            header("location: clases.php");
+        } else {
+            echo "Datos vacíos";
+        }
+    }
+ }
 ?>
