@@ -49,6 +49,7 @@ include("Conexion/conexion.php");
                         <th scope="col">Fecha de Nacimiento</th>
                         <th scope="col">Asistencias</th>
                         <th scope="col">Porcentaje</th>
+                        <th scope="col">Condicion</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
@@ -65,6 +66,7 @@ include("Conexion/conexion.php");
         </div>
     </div>
     <script src="Bootstrap/js/bootstrap.bundle.min.js"></script>
+
 </body>
 
 </html>

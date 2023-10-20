@@ -56,13 +56,14 @@
 
         public function mostrarAlumnos($alumno){?>
             <tr>
-                <th scope="row"><?php echo $alumno->alumn_DNI; ?></th>
+                <th class="porcentajeAlumno"  scope="row"><?php echo $alumno->alumn_DNI; ?></th>
                 <td><?php echo $alumno->nombre; ?></td>
                 <td><?php echo $alumno->apellido; ?></td>
                 <td><?php echo $alumno->fecha_nac; ?></td>
                 <td><?php echo $alumno->asistencias; ?></td>
-                <td><?php echo $alumno->alumnoPorcentaje($alumno) . "%"; ?>
-            </td>
+                <td ><?php echo $alumno->alumnoPorcentaje($alumno) . "%"; ?></td>
+                <td ><?php echo $alumno->condicionAlumno($alumno); ?></td>
+                <td>
                     <a class="btn btn-small btn-primary" href="Alumno/Asistencia.php?alumn_DNI=<?= $alumno->alumn_DNI ?>">Asistio</a>
                 </td>
             </tr>
@@ -72,7 +73,7 @@
         //Funcion que muestra los alumnos, permite editar y eliminar
         public function mostrarEditarAlumnos($alumno){
             ?><tr>
-                    <th scope="row"><?php echo $alumno->alumn_DNI; ?></th>
+                    <th scope="row" ><?php echo $alumno->alumn_DNI; ?></th>
                         <td><?php echo $alumno->nombre; ?></td>
                         <td><?php echo $alumno->apellido; ?></td>
                     <td><?php echo $alumno->fecha_nac; ?></td>
@@ -90,7 +91,69 @@
                 </tr> 
             <?php
         }
+        public function alumnoPorcentaje($alumno)
+        {
+            try {
+                $BD = Conexion::connect();
+                $prof_DNI=123;
+                $query = 'SELECT diasClases, porcentajeLibre, porcentajePromocion FROM profesor WHERE prof_DNI = ?';
+                $stmt = $BD->prepare($query);
+                $stmt->bind_param("i", $prof_DNI);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $stmt->close();
+                $profesor = $result->fetch_all(MYSQLI_ASSOC);
+    
+                if (!empty($profesor) && isset($profesor[0]['diasClases'])) {
+                    
+                    $diasClases = $profesor[0]['diasClases'];
+                    $porcentaje = $alumno->asistencias * 100;
+                    $porcentaje = $porcentaje / $diasClases;
+                    $porcentaje = round($porcentaje, 0);
+                    
+                } else {
+                    $diasClases = 0; 
+                    $porcentaje = 0; 
+                }
+            } catch (PDOException $e) {
+                $e;
+            }
+            return $porcentaje;
+        }
+
+
+public function condicionAlumno($alumno) {
+    try {
+        $BD = Conexion::connect();
+        $prof_DNI = 123;
+        $query = 'SELECT porcentajeLibre, porcentajePromocion FROM profesor WHERE prof_DNI = ?';
+        $stmt = $BD->prepare($query);
+        $stmt->bind_param("i", $prof_DNI);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $stmt->close();
+        $profesor = $result->fetch_all(MYSQLI_ASSOC);
+        $condicion="Regular";
+        if (!empty($profesor) && isset($profesor[0]['porcentajeLibre']) && isset($profesor[0]['porcentajePromocion'])) {
+            $porcentaje = $alumno->alumnoPorcentaje($alumno);
+            $porcentaje = (float) $porcentaje;
+            $porcentajeLibre = (float) $profesor[0]['porcentajeLibre'];
+            $porcentajePromocion = (float) $profesor[0]['porcentajePromocion'];
+            if ($porcentaje>=$porcentajePromocion) {
+                $condicion="Promocion";
+            } elseif($porcentaje<$porcentajeLibre) {
+                $condicion="Libre";
+            }
+        }
+    } catch (PDOException $e) {
+        $e;
     }
+    return $condicion;
+}
+
+
+    }
+
     function TraerDatosAlumnos(){
             try{ $BD = Conexion::connect();
                 $query = 'SELECT * FROM alumno';
@@ -104,4 +167,5 @@
             }
         return $alumnos;
     }
+
 ?>
