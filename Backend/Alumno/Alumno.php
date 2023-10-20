@@ -109,7 +109,7 @@
                     $diasClases = $profesor[0]['diasClases'];
                     $porcentaje = $alumno->asistencias * 100;
                     $porcentaje = $porcentaje / $diasClases;
-                    $porcentaje_entero=intval($porcentaje);
+                    
                 } else {
                     $diasClases = 0; // O un valor predeterminado adecuado
                     $porcentaje = 0; // O un valor predeterminado adecuado
@@ -117,7 +117,7 @@
             } catch (PDOException $e) {
                 $e;
             }
-            return $porcentaje_entero;
+            return $porcentaje;
         }
     }
     function TraerDatosAlumnos(){
