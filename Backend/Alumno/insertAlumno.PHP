@@ -9,7 +9,7 @@ $msg_err = insertarAlumno();
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="Bootstrap/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../Bootstrap/css/bootstrap.min.css" />
   <title>T.S.A</title>
 </head>
 
@@ -70,7 +70,7 @@ $msg_err = insertarAlumno();
       </table>
     </div>
   </div>
-  <script src="Bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../Bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

@@ -1,5 +1,6 @@
 <?php
 include("../Conexion/conexion.php");
+function ingresarProfesor(){
 $msg_err="";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
@@ -33,6 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo $e;
     }
 }
+}
  function updateDiasProfesor(){
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $BD = Conexion::connect();
@@ -50,5 +52,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "Datos vacíos";
         }
     }
- }
+}
 ?>
