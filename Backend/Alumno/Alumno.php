@@ -1,5 +1,5 @@
 <?php
-
+    $diasRestados = isset($_POST["restarDias"]) ? $_POST["restarDias"] : 0;
     $msg_err="";
 
     //Funcion que permite agregar alumnos
@@ -150,8 +150,6 @@ public function condicionAlumno($alumno) {
     }
     return $condicion;
 }
-
-
     }
     function TraerDatosAlumnos(){
             try{ $BD = Conexion::connect();
@@ -166,5 +164,6 @@ public function condicionAlumno($alumno) {
             }
         return $alumnos;
     }
+
 
 ?>

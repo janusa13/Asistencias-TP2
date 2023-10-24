@@ -1,5 +1,6 @@
 <?php
 include("../Profesor/insertProfesor.php");
+include("../Alumno/Alumno.php");
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -36,15 +37,18 @@ include("../Profesor/insertProfesor.php");
         </div>
         <button type="submit" class="btn btn-primary" name="btnRegistrar" value="ok"> Ingresar Dias</button>
         <hr />
-        <div class="mb-3">
     </form>
-    <label for="restarDias" class="form-label">Ingresar Feriados/Dias sin clases.</label>
-    <input type="text" class="form-control" id="restarDias" name="restarDias" />
-    </div>
-    <button type="submit" class="btn btn-primary" name="btnRegistrar" value="ok">Restar Dias</button>
+    <form method="POST" action="../Profesor/insertProfesor.php" class="col-4 p-3 ">
+        <div class="mb-3">
+            <label for="restarDias" class="form-label">Ingresar Feriados/Dias sin clases.</label>
+            <input type="text" class="form-control" id="restarDias" name="restarDias" />
+        </div>
+        <button type="submit" class="btn btn-primary" name="btnRegistrar" value="ok" onClick="<?php restarDatos();?>">Restar Dias</button>
+    </form>
     <hr />
     <?php
     updateDiasProfesor();
+    restarDatos();    
     ?>
 
     <script src="Bootstrap/js/bootstrap.bundle.min.js"></script>
