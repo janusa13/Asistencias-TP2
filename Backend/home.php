@@ -18,8 +18,7 @@ include("Conexion/conexion.php");
         <h3 class=" text-center p-3">N.W.A</h3>
     </a>
     <a href="Alumno\insertAlumno.PHP" class="btn btn-small btn-primary">Opciones de Alumnos</a>
-    <a href="src\insertDocente.PHP" class="btn btn-small btn-primary">Registrar Docente</a>
-    <a href="Asistencias\clases.PHP" class="btn btn-small btn-primary">Opciones de clases</a>
+    <a href="Asistencias\clases.PHP" class="btn btn-small btn-primary">Parametros</a>
     <div class="container-fluid row">
         <form method="POST" action="home.php" class="col-4 p-3">
             <h3 class="text-center text-secondary">Buscar Alumno</h3>

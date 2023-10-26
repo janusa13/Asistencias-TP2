@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
  function updateDiasProfesor(){
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $BD = Conexion::connect();
-        $prof_DNI = $_POST["prof_DNI"];
+        $prof_DNI = 123;
         $cantidadClases = $_POST["diasClases"];
         $porcentajeLibre = $_POST["porcentajeLibre"];
         $porcentajePromocion = $_POST["porcentajePromocion"];
