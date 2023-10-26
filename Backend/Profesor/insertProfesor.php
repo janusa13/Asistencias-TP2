@@ -1,6 +1,6 @@
 <?php
 include("../Conexion/conexion.php");
-function agregarProfesor(){
+function ingresarProfesor(){
 $msg_err="";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 }
-function updateDiasProfesor(){
+ function updateDiasProfesor(){
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $BD = Conexion::connect();
         $prof_DNI = $_POST["prof_DNI"];
@@ -52,25 +52,5 @@ function updateDiasProfesor(){
             echo "Datos vacíos";
         }
     }
- }
-
- function restarDatos(){
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    try{
-        $BD=Conexion::connect();
-        $restarDias=$_POST["restarDias"];
-        $prof_DNI=123;
-        if($restarDias!=NULL){
-            $query="UPDATE profesor SET diasClases = diasClases -? where prof_DNI=?";
-            $stmt = $BD->prepare($query);
-            $stmt->bind_param("ii",$restarDias,$prof_DNI);
-            $stmt->execute();
-            $stmt->close();
-            echo "LISTORTI";
-        }
-        }catch(PDOException $e){
-            die("ERROR: ". $e->getMessage());
-        }
-    }
-    }
+}
 ?>
