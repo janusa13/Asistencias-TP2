@@ -4,7 +4,7 @@ require_once("../Alumno/Alumno.php");
 $alumn_DNI = $_GET["alumn_DNI"];
 try {
   $BD = Conexion::connect();
-  $query = "SELECT * FROM alumno WHERE alumn_DNI=?";
+  $query = 'SELECT alumn_DNI, nombre, apellido, asistencias, DATE_FORMAT(fecha_nac, "%d-%m-%Y") AS fecha_nac FROM alumno';
   $stmt = $BD->prepare($query);
   $stmt->bind_param('i', $alumn_DNI);
   $stmt->execute();
