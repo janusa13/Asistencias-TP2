@@ -103,7 +103,7 @@
                 $result = $stmt->get_result();
                 $stmt->close();
                 $profesor = $result->fetch_all(MYSQLI_ASSOC);
-    
+
                 if (!empty($profesor) && isset($profesor[0]['diasClases'])) {
                     
                     $diasClases = $profesor[0]['diasClases'];
