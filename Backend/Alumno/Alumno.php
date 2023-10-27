@@ -56,6 +56,7 @@
             $this->nombre=$nombre;
             $this->apellido=$apellido;
             $this->fecha_nac=$fecha_nac;
+            
             $this->asistencias=$asistencias;
         }
 
@@ -65,11 +66,12 @@
                 <td><?php echo $alumno->nombre; ?></td>
                 <td><?php echo $alumno->apellido; ?></td>
                 <td><?php echo $alumno->fecha_nac; ?></td>
-                <td><?php echo $alumno->asistencias; ?></td>
+                <td><?php $alumno->actualizarAsistencias();
+                            echo $alumno->asistencias; ?></td>
                 <td ><?php echo $alumno->alumnoPorcentaje($alumno) . "%"; ?></td>
                 <td ><?php echo $alumno->condicionAlumno($alumno); ?></td>
                 <td>
-                    <a class="btn btn-small btn-primary" href="Alumno/Asistencia.php?alumn_DNI=<?= $alumno->alumn_DNI ?>">Asistio</a>
+                   <a class="btn btn-small btn-primary" href="Alumno/Asistencia.php?alumn_DNI=<?= $alumno->alumn_DNI ?>">Asistio</a>
                 </td>
             </tr>
         <?php
@@ -156,6 +158,22 @@ public function condicionAlumno($alumno) {
     return $condicion;
 }
 
+    public function actualizarAsistencias() {
+        try {
+            $BD = Conexion::connect();
+            $query = 'SELECT COUNT(*) as asistencias FROM Asistencia WHERE alumno_FK = ?';
+            $stmt = $BD->prepare($query);
+            $stmt->bind_param("i", $this->alumn_DNI);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $row = $result->fetch_assoc();
+            if ($row && isset($row['asistencias'])) {
+                $this->asistencias = $row['asistencias'];
+            } 
+            } catch (mysqli_sql_exception $e) {
+            die("Error: " . $e->getMessage());
+        }
+    }
 
     }
 
@@ -184,5 +202,6 @@ public function condicionAlumno($alumno) {
 
         return $edadAnios;
     }
+
 
 ?>

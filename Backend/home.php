@@ -2,6 +2,7 @@
 require_once("Alumno/Alumno.php");
 require_once("Alumno/buscarAlumno.php");
 include("Conexion/conexion.php");
+include("Alumno/Asistencia.php");
 ?>
 <!DOCTYPE html>
 <html lang="esp">
@@ -58,6 +59,8 @@ include("Conexion/conexion.php");
                     foreach ($alumnos as $alumno_data) {
                         $alumno = new Alumno($alumno_data['alumn_DNI'], $alumno_data['nombre'], $alumno_data['apellido'], $alumno_data['fecha_nac'], $alumno_data['asistencias']);
                         $alumno->mostrarAlumnos($alumno);
+                        
+                        
                     }
                     ?>
                 </tbody>

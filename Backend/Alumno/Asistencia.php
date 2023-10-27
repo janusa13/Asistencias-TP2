@@ -1,28 +1,42 @@
 <?php
-include ('../Conexion/conexion.php');
-require_once('Alumno.php');
-$alumn_DNI = $_GET["alumn_DNI"];
-try {
-    $BD = Conexion::connect();
-
-    $querySelect = 'SELECT asistencias FROM alumno WHERE alumn_DNI = ?';
-    $stmtSelect = $BD->prepare($querySelect);
-    $stmtSelect->bind_param("i", $alumn_DNI);
-    $stmtSelect->execute();
-    $result = $stmtSelect->get_result();
-    $row = $result->fetch_assoc();
-    $asistencias = $row["asistencias"];
-
-    $asistencias += 1;
-    
-    $queryUpdate = 'UPDATE alumno SET asistencias = ? WHERE alumn_DNI = ?'; 
-    $stmtUpdate = $BD->prepare($queryUpdate);
-    $stmtUpdate->bind_param("ii", $asistencias, $alumn_DNI);
-    $stmtUpdate->execute();
-    if ($stmtUpdate->execute()){
-        header("location:../home.php");
-    }
-} catch (mysqli_sql_exception $e) {
-    die("Error: " . $e->getMessage());
+// Verifica si se recibió el parámetro "alumn_DNI" en la URL
+if (isset($_GET["alumn_DNI"])) {
+    $alumn_DNI = $_GET["alumn_DNI"];
+    $msg = insertAsistencias($alumn_DNI);
 }
+function insertAsistencias($alumn_DNI) {
+    include("../Conexion/conexion.php");
+    $fecha = date("Y-m-d");
+    $msg = "";
+    try {
+        $BD = Conexion::connect();
+
+        $querySelect = 'SELECT * FROM Asistencia WHERE alumno_FK = ? AND fecha = ?';
+        $stmtSelect = $BD->prepare($querySelect);
+        $stmtSelect->bind_param("is", $alumn_DNI, $fecha);
+        $stmtSelect->execute();
+        $result = $stmtSelect->get_result();
+        $row = $result->fetch_assoc();
+
+        if (!$row) {
+            $queryInsert = 'INSERT INTO Asistencia (alumno_FK, fecha) VALUES (?, ?)';
+            $stmtInsert = $BD->prepare($queryInsert);
+            $stmtInsert->bind_param("is", $alumn_DNI, $fecha);
+
+            if ($stmtInsert->execute()) {
+                $msg = "Asistencia registrada con éxito.";
+            } else {
+                $msg = "Error al insertar asistencia.";
+            }
+        } else {
+            $msg = "Ya existe una asistencia para este alumno en esta fecha.";
+        }
+    } catch (mysqli_sql_exception $e) {
+        die("Error: " . $e->getMessage());
+    }
+    header("location:../home.php");
+    return $msg;
+}
+
 ?>
+
