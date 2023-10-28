@@ -1,5 +1,6 @@
 <?php
 include("../Conexion/conexion.php");
+function ingresarProfesor(){
 $msg_err="";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
@@ -33,10 +34,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo $e;
     }
 }
+<<<<<<< HEAD
  function updateDiasProfesor(){
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $BD = Conexion::connect();
         $prof_DNI = $_POST["prof_DNI"];
+=======
+}
+ function updateDiasProfesor(){
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $BD = Conexion::connect();
+        $prof_DNI = 123;
+>>>>>>> 0378d5d58660e5f5128670c2eacb002d74331ae4
         $cantidadClases = $_POST["diasClases"];
         $porcentajeLibre = $_POST["porcentajeLibre"];
         $porcentajePromocion = $_POST["porcentajePromocion"];
@@ -50,5 +59,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "Datos vacíos";
         }
     }
+<<<<<<< HEAD
  }
+=======
+}
+>>>>>>> 0378d5d58660e5f5128670c2eacb002d74331ae4
 ?>

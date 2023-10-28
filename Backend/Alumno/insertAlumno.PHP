@@ -26,11 +26,17 @@ $msg_err = insertarAlumno();
           echo "<div class='alert alert-warning'>Campos vacios</div>";
         } elseif ($msg_err == "Datos del DNI no validos") {
           echo "<div class='alert alert-warning'>Datos del DNI no validos</div>";
+<<<<<<< HEAD
+=======
+        }elseif($msg_err=="Menor de Edad"){
+          echo "<div class='alert alert-warning'>Menor de Edad</div>";
+>>>>>>> 0378d5d58660e5f5128670c2eacb002d74331ae4
         }
       }
       ?>
       <div class="mb-3">
         <label for="alumn_dni" class="form-label">DNI</label>
+<<<<<<< HEAD
         <input type="text" class="form-control" name="alumn_DNI" id="alumn_dni" aria-describedby="dni_alumno">
         <div class="mb-3">
           <label for="nombre_alumno" class="form-label">Nombre</label>
@@ -39,6 +45,16 @@ $msg_err = insertarAlumno();
         <div class="mb-3">
           <label for="apellido_alumno" class="form-label">Apellido</label>
           <input type="text" class="form-control" id="apellido_alumno" name="apellido">
+=======
+        <input type="text" class="form-control" name="alumn_DNI" id="alumn_dni" placeholder="Solo numeros" aria-describedby="dni_alumno" onkeydown="validarNumerosTecla(event)">
+        <div class="mb-3">
+          <label for="nombre_alumno" class="form-label">Nombre</label>
+          <input type="text" class="form-control" id="nombre_alumno" name="nombre" onkeydown="validarTecla(event)">
+        </div>
+        <div class="mb-3">
+          <label for="apellido_alumno" class="form-label">Apellido</label>
+          <input type="text" class="form-control" id="apellido_alumno" name="apellido" onkeydown="validarTecla(event)">
+>>>>>>> 0378d5d58660e5f5128670c2eacb002d74331ae4
         </div>
       </div>
       <div class="mb-3">
@@ -71,6 +87,27 @@ $msg_err = insertarAlumno();
     </div>
   </div>
   <script src="../Bootstrap/js/bootstrap.bundle.min.js"></script>
+<<<<<<< HEAD
+=======
+  <script>
+  function validarTecla(event) {
+    const tecla = event.key;
+    const caracteresPermitidos = /^[A-ZÁÉÍÓÚÜÑa-záéíóúüñ ]$/;
+    if (tecla !== "Backspace" && tecla !== "Delete" && !caracteresPermitidos.test(tecla)) {
+      event.preventDefault();
+    }
+  }
+
+  function validarNumerosTecla(event) {
+  const tecla = event.key;
+  const numerosPermitidos = /^[1-9]$/;
+  
+  if (tecla !== "Backspace" && tecla !== "Delete" && (!numerosPermitidos.test(tecla) || event.key === " ")) {
+    event.preventDefault();
+  }
+}
+  </script>
+>>>>>>> 0378d5d58660e5f5128670c2eacb002d74331ae4
 </body>
 
 </html>

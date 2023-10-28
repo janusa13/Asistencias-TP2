@@ -1,12 +1,10 @@
-
 CREATE DATABASE Asistencia;
-
 USE Asistencia;
-
 CREATE TABLE Profesor (
     prof_DNI INT PRIMARY KEY,
     telefono INT,
     apellido VARCHAR(100) NOT NULL,
+<<<<<<< HEAD
     nombre VARCHAR(100) NOT NULL,
      diasClases INT,
     porcentajeLibre INT,
@@ -15,10 +13,14 @@ CREATE TABLE Profesor (
 
 CREATE TABLE Materia ( 
     materia_ID INT PRIMARY KEY AUTO_INCREMENT,
+=======
+>>>>>>> 0378d5d58660e5f5128670c2eacb002d74331ae4
     nombre VARCHAR(100) NOT NULL,
-    profesor_FK INT,
-    FOREIGN KEY (profesor_FK) REFERENCES Profesor(prof_DNI)
+    diasClases INT,
+    porcentajeLibre INT,
+    porcentajePromocion int
 );
+<<<<<<< HEAD
 
 CREATE TABLE DIAS_MATERIAS(
 	dias_fk INT,
@@ -54,6 +56,8 @@ CREATE TABLE Horarios (
     FOREIGN KEY(materia_FK) REFERENCES Materia(materia_ID)
 );
 
+=======
+>>>>>>> 0378d5d58660e5f5128670c2eacb002d74331ae4
 CREATE TABLE Alumno (
     alumn_DNI INT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
@@ -61,6 +65,7 @@ CREATE TABLE Alumno (
     asistencias INT DEFAULT 0,
     fecha_nac DATE
 );
+<<<<<<< HEAD
 
 CREATE TABLE Alumno_Materia(
 	alumno_FK INT,
@@ -100,6 +105,8 @@ CREATE TABLE realiza_Trabajo (
     FOREIGN KEY(trabajo_FK) REFERENCES Trabajos(trabajo_ID)
 );
 
+=======
+>>>>>>> 0378d5d58660e5f5128670c2eacb002d74331ae4
 CREATE TABLE Asistencia (
     materia_FK INT,
     alumno_FK INT,

@@ -4,7 +4,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<<<<<<< HEAD
   <link rel="stylesheet" href="../Bootstrap/css/bootstrap.min.css" />
+=======
+  <link rel="stylesheet" href="Bootstrap/css/bootstrap.min.css" />
+>>>>>>> 0378d5d58660e5f5128670c2eacb002d74331ae4
   <title>T.S.A</title>
 </head>
 
@@ -32,7 +36,11 @@
       <button type="submit" class="btn btn-primary" name="btnRegistrar" value="ok">Registrar</button>
     </form>
   </div>
+<<<<<<< HEAD
   <script src="../Bootstrap/js/bootstrap.bundle.min.js"></script>
+=======
+  <script src="Bootstrap/js/bootstrap.bundle.min.js"></script>
+>>>>>>> 0378d5d58660e5f5128670c2eacb002d74331ae4
 </body>
 
 </html>
