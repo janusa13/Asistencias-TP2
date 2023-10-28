@@ -38,5 +38,6 @@ function insertAsistencias($alumn_DNI) {
     return $msg;
 }
 
+/* AGREGAR PODER INSERTAR UNA ASISTENCIA, FECHA DE ASISTENCIA DE TIPO TIMESTAND para registrar asistencias tardias agregar asistencias taridas como boton al lado de asistencias
+*/
 ?>
-

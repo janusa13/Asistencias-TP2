@@ -71,7 +71,7 @@
                 <td ><?php echo $alumno->alumnoPorcentaje($alumno) . "%"; ?></td>
                 <td ><?php echo $alumno->condicionAlumno($alumno); ?></td>
                 <td>
-                   <a class="btn btn-small btn-primary" href="Alumno/Asistencia.php?alumn_DNI=<?= $alumno->alumn_DNI ?>">Asistio</a>
+                    <a class="btn btn-small btn-primary" href="Alumno/Asistencia.php?alumn_DNI=<?= $alumno->alumn_DNI ?>">Asistio</a>
                 </td>
             </tr>
         <?php
