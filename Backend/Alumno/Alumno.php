@@ -20,12 +20,17 @@
                     $check_stmt->fetch();
                     $check_stmt->close();
                     if ($num_rows == 0) {
+                        $edad=calcularEdad($fecha_nac);
+                        if($edad>=17){
                         $query = "INSERT INTO alumno(alumn_DNI, nombre, apellido, fecha_nac) 
                         VALUES (?, ?, ?, ?)";
                         $stmt = $BD->prepare($query);
                         $stmt->bind_param("ssss", $alumn_DNI, $nombre, $apellido, $fecha_nac); 
                         $stmt->execute();
                         header("location:insertAlumno.php");
+                        }else{
+                            $msg_err="Menor de Edad";
+                        }
                     } else {
                         $msg_err="Datos ya existentes";
                     }
@@ -51,6 +56,7 @@
             $this->nombre=$nombre;
             $this->apellido=$apellido;
             $this->fecha_nac=$fecha_nac;
+            
             $this->asistencias=$asistencias;
         }
 
@@ -60,7 +66,8 @@
                 <td><?php echo $alumno->nombre; ?></td>
                 <td><?php echo $alumno->apellido; ?></td>
                 <td><?php echo $alumno->fecha_nac; ?></td>
-                <td><?php echo $alumno->asistencias; ?></td>
+                <td><?php $alumno->actualizarAsistencias();
+                            echo $alumno->asistencias; ?></td>
                 <td ><?php echo $alumno->alumnoPorcentaje($alumno) . "%"; ?></td>
                 <td ><?php echo $alumno->condicionAlumno($alumno); ?></td>
                 <td>
@@ -151,12 +158,28 @@ public function condicionAlumno($alumno) {
     return $condicion;
 }
 
+    public function actualizarAsistencias() {
+        try {
+            $BD = Conexion::connect();
+            $query = 'SELECT COUNT(*) as asistencias FROM Asistencia WHERE alumno_FK = ?';
+            $stmt = $BD->prepare($query);
+            $stmt->bind_param("i", $this->alumn_DNI);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $row = $result->fetch_assoc();
+            if ($row && isset($row['asistencias'])) {
+                $this->asistencias = $row['asistencias'];
+            } 
+            } catch (mysqli_sql_exception $e) {
+            die("Error: " . $e->getMessage());
+        }
+    }
 
     }
 
     function TraerDatosAlumnos(){
             try{ $BD = Conexion::connect();
-                $query = 'SELECT * FROM alumno';
+                $query = 'SELECT alumn_DNI, nombre, apellido, asistencias, DATE_FORMAT(fecha_nac, "%d-%m-%Y") AS fecha_nac FROM alumno';
                 $stmt=$BD->prepare($query);
                 $stmt->execute();
                 $result = $stmt->get_result();
@@ -167,5 +190,18 @@ public function condicionAlumno($alumno) {
             }
         return $alumnos;
     }
+
+    function calcularEdad($fecha_nac) {
+        $fechaActual = (new DateTime())->format('Y-m-d');
+
+        $fecha_nac = new DateTime($fecha_nac);
+        $fechaActual = new DateTime($fechaActual);
+
+        $edad = $fechaActual->diff($fecha_nac);
+        $edadAnios = $edad->y; 
+
+        return $edadAnios;
+    }
+
 
 ?>

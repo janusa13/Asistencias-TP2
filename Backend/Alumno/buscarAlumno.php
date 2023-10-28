@@ -15,7 +15,7 @@
                     if (isset($_POST["alumn_DNI"])) {
                         $alumn_DNI = $_POST["alumn_DNI"];
                     }
-                    $query = 'SELECT * FROM alumno WHERE 1';
+                    $query = 'SELECT alumn_DNI, nombre, apellido, asistencias, DATE_FORMAT(fecha_nac, "%d-%m-%Y") AS fecha_nac FROM alumno WHERE 1';
                     $conditions = array();
                     if (!empty($nombre)) {
                         $conditions[] = "nombre LIKE '%" . $nombre . "%'";

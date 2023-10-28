@@ -1,6 +1,7 @@
 <?php
 include("../Profesor/insertProfesor.php");
 include("../Profesor/restarDias.php");
+include("mostrarClases.php");
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -41,10 +42,39 @@ include("../Profesor/restarDias.php");
         </div>
         <button type="submit" class="btn btn-primary" name="btnRegistrar" value="ok">Restar Dias</button>
     </form>
+<<<<<<< HEAD
     <hr />
+=======
+    </div>
+     <div class="col-8 p-4">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Dias de Clases</th>
+                        <th scope="col">Porcentaje de Libre</th>
+                        <th scope="col">Porcentaje de Promocion</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $resultados = mostrarClases();
+                    foreach ($resultados as $datos) {
+                        ?>
+                         <tr>
+                <th   scope="row"><?php echo $datos["diasClases"]; ?></th>
+                <td><?php echo $datos["porcentajeLibre"]; ?></td>
+                <td><?php echo $datos["porcentajePromocion"]; ?></td>
+            </tr>
+                    <?php
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </div>
+>>>>>>> 0378d5d58660e5f5128670c2eacb002d74331ae4
     <?php
     updateDiasProfesor();
-    //restarDatos();
     ?>
 
     <script src="../Bootstrap/js/bootstrap.bundle.min.js"></script>

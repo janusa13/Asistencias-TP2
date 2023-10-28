@@ -56,6 +56,7 @@ if($msg_err=="Datos ya existentes"){
   echo "<div class='alert alert-warning'>Datos del DNI no validos</div>";
 }
 
+<<<<<<< HEAD
   ?>
   <div class="mb-3">
     <label for="alumn_dni" class="form-label">DNI</label>
@@ -80,6 +81,56 @@ if($msg_err=="Datos ya existentes"){
       <thead>
         <tr>
         <th scope="col">DNI</th>
+=======
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../Bootstrap/css/bootstrap.min.css" />
+  <title>T.S.A</title>
+</head>
+
+<body>
+  <h3 class=" text-center p-3"><a href="../home.php">N.W.A</a></h3>
+  <div class="container-fluid row">
+    <form method="POST" action="insertAlumno.php" class="col-4 p-3">
+      <h3 class="text-center text-secondary">Registrar Alumno</h3>
+      <?php
+      if (!empty($msg_err)) {
+        if ($msg_err == "Datos ya existentes") {
+          echo "<div class='alert alert-warning'>Datos ya existentes</div>";
+        } else if ($msg_err == "Campos vacios") {
+          echo "<div class='alert alert-warning'>Campos vacios</div>";
+        } elseif ($msg_err == "Datos del DNI no validos") {
+          echo "<div class='alert alert-warning'>Datos del DNI no validos</div>";
+        }elseif($msg_err=="Menor de Edad"){
+          echo "<div class='alert alert-warning'>Menor de Edad</div>";
+        }
+      }
+      ?>
+      <div class="mb-3">
+        <label for="alumn_dni" class="form-label">DNI</label>
+        <input type="text" class="form-control" name="alumn_DNI" id="alumn_dni" placeholder="Solo numeros" aria-describedby="dni_alumno" onkeydown="validarNumerosTecla(event)">
+        <div class="mb-3">
+          <label for="nombre_alumno" class="form-label">Nombre</label>
+          <input type="text" class="form-control" id="nombre_alumno" name="nombre" onkeydown="validarTecla(event)">
+        </div>
+        <div class="mb-3">
+          <label for="apellido_alumno" class="form-label">Apellido</label>
+          <input type="text" class="form-control" id="apellido_alumno" name="apellido" onkeydown="validarTecla(event)">
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="fecha_alumn" class="form-label">Fecha de nacimiento</label>
+        <input type="date" class="form-control" id="fecha_nac" name="fecha_nac">
+      </div>
+      <button type="submit" class="btn btn-primary" name="btnRegistrar" value="ok">Registrar</button>
+    </form>
+    <div class="col -8 p-4">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">DNI</th>
+>>>>>>> 0378d5d58660e5f5128670c2eacb002d74331ae4
             <th scope="col">Nombre</th>
             <th scope="col">Apellido</th>
             <th scope="col">Fecha de Nacimiento</th>
@@ -124,7 +175,31 @@ if($msg_err=="Datos ya existentes"){
       </tbody>
     </table>
   </div>
+<<<<<<< HEAD
     </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
   </body>
+=======
+  <script src="../Bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script>
+  function validarTecla(event) {
+    const tecla = event.key;
+    const caracteresPermitidos = /^[A-ZÁÉÍÓÚÜÑa-záéíóúüñ ]$/;
+    if (tecla !== "Backspace" && tecla !== "Delete" && !caracteresPermitidos.test(tecla)) {
+      event.preventDefault();
+    }
+  }
+
+  function validarNumerosTecla(event) {
+  const tecla = event.key;
+  const numerosPermitidos = /^[1-9]$/;
+  
+  if (tecla !== "Backspace" && tecla !== "Delete" && (!numerosPermitidos.test(tecla) || event.key === " ")) {
+    event.preventDefault();
+  }
+}
+  </script>
+</body>
+
+>>>>>>> 0378d5d58660e5f5128670c2eacb002d74331ae4
 </html>
