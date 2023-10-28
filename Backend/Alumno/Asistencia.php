@@ -4,8 +4,6 @@ if (isset($_GET["alumn_DNI"])) {
     $alumn_DNI = $_GET["alumn_DNI"];
     $msg = insertAsistencias($alumn_DNI);
 }
-<<<<<<< HEAD
-=======
 function insertAsistencias($alumn_DNI) {
     include("../Conexion/conexion.php");
     $fecha = date("Y-m-d");
@@ -42,5 +40,4 @@ function insertAsistencias($alumn_DNI) {
 
 /* AGREGAR PODER INSERTAR UNA ASISTENCIA, FECHA DE ASISTENCIA DE TIPO TIMESTAND para registrar asistencias tardias agregar asistencias taridas como boton al lado de asistencias
 */
->>>>>>> 0378d5d58660e5f5128670c2eacb002d74331ae4
 ?>

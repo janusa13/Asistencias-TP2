@@ -42,9 +42,6 @@ include("mostrarClases.php");
         </div>
         <button type="submit" class="btn btn-primary" name="btnRegistrar" value="ok">Restar Dias</button>
     </form>
-<<<<<<< HEAD
-    <hr />
-=======
     </div>
      <div class="col-8 p-4">
             <table class="table table-striped">
@@ -72,7 +69,6 @@ include("mostrarClases.php");
                 </tbody>
             </table>
         </div>
->>>>>>> 0378d5d58660e5f5128670c2eacb002d74331ae4
     <?php
     updateDiasProfesor();
     ?>
