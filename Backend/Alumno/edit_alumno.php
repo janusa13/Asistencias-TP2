@@ -9,31 +9,27 @@ if (isset($_POST["btnRegistrar"])) {
     $apellido = $_POST["apellido"];
     $fecha_nac = $_POST["fecha_nac"];
 
-try {
-    $BD = Conexion::connect();
-    $viejo_DNI = $_POST["viejo_DNI"];
-    $alumn_DNI = $_POST["alumn_DNI"];
-    $nombre = $_POST["nombre"];
-    $apellido = $_POST["apellido"];
-    $fecha_nac = $_POST["fecha_nac"];
+    try {
+        $BD = Conexion::connect();
 
-    // Realiza la actualización en ambas tablas usando un INNER JOIN
-    $edit_query = "UPDATE Alumno AS A
-                  INNER JOIN Asistencia AS ASI ON A.alumn_DNI = ASI.alumno_FK
-                  SET A.alumn_DNI = ?, A.nombre = ?, A.apellido = ?, A.fecha_nac = ?,
-                      ASI.alumno_FK = ?
-                  WHERE A.alumn_DNI = ?";
-    
-    $edit_stmt = $BD->prepare($edit_query);
-    $edit_stmt->bind_param("ssssii", $alumn_DNI, $nombre, $apellido, $fecha_nac, $alumn_DNI, $viejo_DNI);
-    $edit_stmt->execute();
-    
-    $edit_stmt->close();
+        // Primero, actualiza los registros en la tabla "Asistencia" que hacen referencia al DNI antiguo.
+        $update_asistencia_query = "UPDATE Asistencia SET alumno_FK = ? WHERE alumno_FK = ?";
+        $update_asistencia_stmt = $BD->prepare($update_asistencia_query);
+        $update_asistencia_stmt->bind_param("ii", $alumn_DNI, $viejo_DNI);
+        $update_asistencia_stmt->execute();
+        $update_asistencia_stmt->close();
 
-    header("location: insertAlumno.php");
-} catch (mysqli_sql_exception $e) {
-    echo "Error al actualizar los datos: " . $e->getMessage();
-}
+        // Luego, actualiza el DNI del alumno en la tabla "Alumno".
+        $update_alumno_query = "UPDATE Alumno SET alumn_DNI = ?, nombre = ?, apellido = ?, fecha_nac = ? WHERE alumn_DNI = ?";
+        $update_alumno_stmt = $BD->prepare($update_alumno_query);
+        $update_alumno_stmt->bind_param("isssi", $alumn_DNI, $nombre, $apellido, $fecha_nac, $viejo_DNI);
+        $update_alumno_stmt->execute();
+        $update_alumno_stmt->close();
+
+        header("location: insertAlumno.php");
+    } catch (mysqli_sql_exception $e) {
+        echo "Error al actualizar los datos: " . $e->getMessage();
+    }
 }
 
 $alumn_DNI = $_GET["alumn_DNI"];
