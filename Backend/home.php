@@ -40,7 +40,7 @@ include("Conexion/conexion.php");
       </div>
     </form>
     <div class="col-8 p-4">
-      <table class="table table-striped">
+      <table class="table-responsive ">
         <thead>
           <tr>
             <th scope="col">DNI</th>
