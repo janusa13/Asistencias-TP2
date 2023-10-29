@@ -25,15 +25,15 @@ include("Alumno/Asistencia.php");
             <h3 class="text-center text-secondary">Buscar Alumno</h3>
             <div class="mb-3">
                 <label for="nombre_alumno" class="form-label">Nombre</label>
-                <input type="text" class="form-control" id="nombre_alumno" name="nombre" />
+                <input type="text" class="form-control" id="nombre_alumno" name="nombre" onkeydown="validarTecla(event)" />
             </div>
             <div class="mb-3">
                 <label for="apellido_alumno" class="form-label">Apellido</label>
-                <input type="text" class="form-control" id="apellido_alumno" name="apellido" />
+                <input type="text" class="form-control" id="apellido_alumno" name="apellido" onkeydown="validarTecla(event)" />
             </div>
             <div class="mb-3">
                 <label for="DNI" class="form-label">DNI</label>
-                <input type="text" class="form-control" id="alumn_DNI" name="alumn_DNI" />
+                <input type="text" class="form-control" id="alumn_DNI" name="alumn_DNI" onkeydown="validarNumerosTecla(event)"/>
                 <button type="submit" class="btn btn-primary" name="btnRegistrar" value="ok">
                     Buscar
                 </button>
@@ -63,6 +63,23 @@ include("Alumno/Asistencia.php");
                         
                     }
                     ?>
+                    <script>
+                        function validarTecla(event) {
+                            const tecla = event.key;
+                            const caracteresPermitidos = /^[A-ZÁÉÍÓÚÜÑa-záéíóúüñ ]$/;
+                            if (tecla !== "Backspace" && tecla !== "Delete" && !caracteresPermitidos.test(tecla)) {
+                                event.preventDefault();
+                            }
+                        }
+                      function validarNumerosTecla(event) {
+    const tecla = event.key;
+    const numerosPermitidos = /^[-0-9]$/;
+    if (tecla !== "Backspace" && tecla !== "Delete" && (!numerosPermitidos.test(tecla) || event.key === " ")) {
+        event.preventDefault();
+    }
+}
+
+                    </script>
                 </tbody>
             </table>
         </div>

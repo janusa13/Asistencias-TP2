@@ -67,15 +67,15 @@ try {
       <input type="hidden" name="viejo_DNI" value="<?php echo $alumno->alumn_DNI; ?>" />
       <div class="mb-3">
         <label for="alumn_dni" class="form-label">DNI</label>
-        <input type="text" class="form-control" name="alumn_DNI" id="alumn_dni" aria-describedby="dni_alumno" value="<?php echo $alumno->alumn_DNI; ?>">
+        <input type="text" class="form-control" name="alumn_DNI" id="alumn_dni" aria-describedby="dni_alumno" value="<?php echo $alumno->alumn_DNI; ?>" onkeydown="validarNumerosTecla(event)">
       </div>
       <div class="mb-3">
         <label for="nombre_alumno" class="form-label">Nombre</label>
-        <input type="text" class="form-control" id="nombre_alumno" name="nombre" value="<?php echo $alumno->nombre; ?>">
+        <input type="text" class="form-control" id="nombre_alumno" name="nombre" value="<?php echo $alumno->nombre; ?>"onkeydown="validarTecla(event)">
       </div>
       <div class="mb-3">
         <label for="apellido_alumno" class="form-label">Apellido</label>
-        <input type="text" class="form-control" id="apellido_alumno" name="apellido" value="<?php echo $alumno->apellido; ?>">
+        <input type="text" class="form-control" id="apellido_alumno" name="apellido" value="<?php echo $alumno->apellido; ?>"onkeydown="validarTecla(event)">
       </div>
       <div class="mb-3">
         <label for="fecha_alumn" class="form-label">Fecha de nacimiento</label>
@@ -85,5 +85,22 @@ try {
     <?php } ?>
   </form>
   <script src="../Bootstrap/js/bootstrap.min.js"></script>
+   <script>
+  function validarTecla(event) {
+    const tecla = event.key;
+    const caracteresPermitidos = /^[A-ZÁÉÍÓÚÜÑa-záéíóúüñ ]$/;
+    if (tecla !== "Backspace" && tecla !== "Delete" && !caracteresPermitidos.test(tecla)) {
+      event.preventDefault();
+    }
+  }
+
+                      function validarNumerosTecla(event) {
+    const tecla = event.key;
+    const numerosPermitidos = /^[-0-9]$/;
+    if (tecla !== "Backspace" && tecla !== "Delete" && (!numerosPermitidos.test(tecla) || event.key === " ")) {
+        event.preventDefault();
+    }
+}
+  </script>
 </body>
 </html>
