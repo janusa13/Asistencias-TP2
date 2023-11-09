@@ -1,5 +1,5 @@
 <?php
-// Verifica si se recibió el parámetro "alumn_DNI" en la URL
+
 if (isset($_GET["alumn_DNI"])) {
     $alumn_DNI = $_GET["alumn_DNI"];
     $msg = insertAsistencias($alumn_DNI);
@@ -38,6 +38,7 @@ function insertAsistencias($alumn_DNI) {
     return $msg;
 }
 
-/* AGREGAR PODER INSERTAR UNA ASISTENCIA, FECHA DE ASISTENCIA DE TIPO TIMESTAND para registrar asistencias tardias agregar asistencias taridas como boton al lado de asistencias
-*/
+function asistenciaTardia($alumn_DNI, $fecha){
+    include("../Conexion/conexion.php");
+}
 ?>

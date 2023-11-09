@@ -94,13 +94,13 @@ try {
     }
   }
 
-                      function validarNumerosTecla(event) {
-    const tecla = event.key;
-    const numerosPermitidos = /^[-0-9]$/;
-    if (tecla !== "Backspace" && tecla !== "Delete" && (!numerosPermitidos.test(tecla) || event.key === " ")) {
+    function validarNumerosTecla(event) {
+      const tecla = event.key;
+      const numerosPermitidos = /^[-0-9]$/;
+      if (tecla !== "Backspace" && tecla !== "Delete" && (!numerosPermitidos.test(tecla) || event.key === " ")) {
         event.preventDefault();
+      }
     }
-}
   </script>
 </body>
 </html>

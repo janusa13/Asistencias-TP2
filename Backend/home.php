@@ -20,6 +20,7 @@ include("Alumno/Asistencia.php");
     </a>
     <a href="Alumno\insertAlumno.PHP" class="btn btn-small btn-primary">Opciones de Alumnos</a>
     <a href="Asistencias\clases.PHP" class="btn btn-small btn-primary">Parametros</a>
+    <a class="btn btn-small btn-danger" href="Asistencias\asistenciatardia.php" >Asistencia Tardia</a>
     <div class="container-fluid row">
         <form method="POST" action="home.php" class="col-4 p-3">
             <h3 class="text-center text-secondary">Buscar Alumno</h3>
