@@ -17,11 +17,11 @@ CREATE TABLE Alumno (
     fecha_nac DATE
 );
 CREATE TABLE Asistencia (
-    materia_FK INT,
     alumno_FK INT,
-    asistencias INT DEFAULT 0,
-    FOREIGN KEY(alumno_FK) REFERENCES Alumno(alumn_DNI) ON UPDATE, ON DELETE CASCADE
+    fecha DATE,
+    FOREIGN KEY(alumno_FK) REFERENCES Alumno(alumn_DNI) ON UPDATE CASCADE
 );
+
 INSERT INTO Profesor (prof_DNI, telefono, apellido, nombre)
 VALUES (
         123,
@@ -119,7 +119,7 @@ VALUES (
         '1999-01-01'
     );
 INSERT INTO Alumno (alumn_DNI, nombre, apellido, fecha_nac)
-VALUES (45248325, 'Maria Pia', 'Melgarejo', '1999-01-01');
+VALUES (45148325, 'Maria Pia', 'Melgarejo', '1999-01-01');
 INSERT INTO Alumno (alumn_DNI, nombre, apellido, fecha_nac)
 VALUES (
         43631710,
@@ -149,7 +149,7 @@ VALUES (
         '1999-01-01'
     );
 INSERT INTO Alumno (alumn_DNI, nombre, apellido, fecha_nac)
-VALUES (45448325, 'Marcos', 'Reynoso', '1999-01-01');
+VALUES (45248325, 'Marcos', 'Reynoso', '1999-01-01');
 INSERT INTO Alumno (alumn_DNI, nombre, apellido, fecha_nac)
 VALUES (
         39255959,
