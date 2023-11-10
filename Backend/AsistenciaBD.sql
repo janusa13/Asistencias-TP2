@@ -4,60 +4,11 @@ CREATE TABLE Profesor (
     prof_DNI INT PRIMARY KEY,
     telefono INT,
     apellido VARCHAR(100) NOT NULL,
-<<<<<<< HEAD
-    nombre VARCHAR(100) NOT NULL,
-     diasClases INT,
-    porcentajeLibre INT,
-    porcentajePromocion int
-);
-
-CREATE TABLE Materia ( 
-    materia_ID INT PRIMARY KEY AUTO_INCREMENT,
-=======
->>>>>>> 0378d5d58660e5f5128670c2eacb002d74331ae4
     nombre VARCHAR(100) NOT NULL,
     diasClases INT,
     porcentajeLibre INT,
     porcentajePromocion int
 );
-<<<<<<< HEAD
-
-CREATE TABLE DIAS_MATERIAS(
-	dias_fk INT,
-	FOREIGN KEY (dias_fk) REFERENCES dias(dias_id),
-	materia_fk INT,
-	FOREIGN KEY (materia_fk) REFERENCES materia(materia_ID)
-	);
-
-
-CREATE TABLE Dias (
-	dias_id INT PRIMARY KEY AUTO_INCREMENT,
-	nombre VARCHAR(100)
-);
-CREATE TABLE Alumno_cursan_materia(
-    materia_fk INT,
-FOREIGN KEY (materia_FK) REFERENCES materia(materia_ID),
-alumno_fk INT,
-FOREIGN key (alumno_fk) REFERENCES Alumno(alumno_DNI)
-);
-INSERT INTO Dias (nombre) VALUES
-    ('Lunes'),
-    ('Martes'),
-    ('Miércoles'),
-    ('Jueves'),
-    ('Viernes');
-
-
-
-CREATE TABLE Horarios (
-    hora_Desde TIME,
-    hora_Hasta TIME,
-    materia_FK INT,
-    FOREIGN KEY(materia_FK) REFERENCES Materia(materia_ID)
-);
-
-=======
->>>>>>> 0378d5d58660e5f5128670c2eacb002d74331ae4
 CREATE TABLE Alumno (
     alumn_DNI INT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
@@ -65,48 +16,13 @@ CREATE TABLE Alumno (
     asistencias INT DEFAULT 0,
     fecha_nac DATE
 );
-<<<<<<< HEAD
-
-CREATE TABLE Alumno_Materia(
-	alumno_FK INT,
-	materia_FK INT,
-	FOREIGN KEY (ALUMNO_FK) REFERENCES Alumno(alumn_DNI)
-	FOREIGN KEY (materia_FK) REFERENCES Materia(materia_ID)
-
-CREATE TABLE Parciales (
-    parcial_ID INT PRIMARY KEY AUTO_INCREMENT,
-    nombre VARCHAR(100),
-    fecha DATE,
-    materia_FK INT,
-    FOREIGN KEY (materia_FK) REFERENCES Materia(materia_ID)
-);
-
-CREATE TABLE hacen_Parciales(
-    nota INT,
-    alum_FK INT,
-    parcial_FK INT,
-    FOREIGN KEY (alum_FK) REFERENCES Alumno(alumn_DNI),
-    FOREIGN KEY (parcial_FK) REFERENCES Parciales(parcial_ID)
-);
-
-CREATE TABLE Trabajos (
-    trabajo_ID INT PRIMARY KEY,
-    fecha_Entrega DATE,
-    fecha_Inicio DATE,
+CREATE TABLE Materia ( 
+    materia_ID INT PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(100) NOT NULL,
-    materia_FK INT,
-    FOREIGN KEY(materia_FK) REFERENCES Materia(materia_ID)
+    profesor_FK INT,
+    FOREIGN KEY (profesor_FK) REFERENCES Profesor(prof_DNI)
 );
 
-CREATE TABLE realiza_Trabajo (
-    alumno_FK INT,
-    trabajo_FK INT,
-    FOREIGN KEY(alumno_FK) REFERENCES Alumno(alumn_DNI),
-    FOREIGN KEY(trabajo_FK) REFERENCES Trabajos(trabajo_ID)
-);
-
-=======
->>>>>>> 0378d5d58660e5f5128670c2eacb002d74331ae4
 CREATE TABLE Asistencia (
     materia_FK INT,
     alumno_FK INT,
@@ -250,4 +166,4 @@ VALUES (
         '1999-01-01'
     );
 INSERT INTO Alumno (alumn_DNI, nombre, apellido, fecha_nac)
-VALUES (43414566, 'Maximiliano', 'Weyler', '1999-01-01');
+VALUES (43414576, 'Maximiliano', 'Weyler', '1999-01-01');
