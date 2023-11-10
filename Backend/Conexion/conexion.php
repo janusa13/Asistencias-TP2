@@ -3,7 +3,7 @@ class Conexion
 {
     public static function connect()
     {
-        $mariaDB = new mysqli('localhost', 'root', 'root', 'asistencia');
+        $mariaDB = new mysqli('localhost', 'root', '', 'asistencia');
 
         if ($mariaDB->connect_errno) {
             echo "<p hidden>Fallo la conexión: " . $mariaDB->connect_error . "</p>";

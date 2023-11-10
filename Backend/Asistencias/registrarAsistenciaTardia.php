@@ -21,7 +21,7 @@ $msg_err="";
                     $stmt = $BD->prepare($query);
                     $stmt->bind_param("ss", $alumno_FK, $fecha);
                     $stmt->execute();
-                      header("location:asistenciatardia.php");
+                        header("location:asistenciatardia.php");
                     exit();
                 } else {
                     $msg_err = "Ya existe una asistencia en esa fecha para ese alumno";
@@ -34,6 +34,7 @@ $msg_err="";
             echo $msg_err;
         }
         }
+        
         return $msg_err;
     }
 

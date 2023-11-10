@@ -1,6 +1,7 @@
 <?php
 include("registrarAsistenciaTardia.php");
 $msg_err=asistenciaTardia($msg_err);
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -24,6 +25,8 @@ $msg_err=asistenciaTardia($msg_err);
                     }elseif($msg_err=="Error en algo"){
                         echo "<div class='alert alert-warning'>Error en algo</div>";
                     }
+                }elseif($msg_err=="asistencia exitosa"){
+                    echo"<div class='alert alert-warning'>Asistencia Registrada</div>";
                 }
             ?>
             <label for="alumn_DNI" class="form-label">DNI del Alumno</label>
