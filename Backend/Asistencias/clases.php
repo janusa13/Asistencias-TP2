@@ -1,8 +1,37 @@
 <?php
 include("../Profesor/insertProfesor.php");
-include("../Profesor/restarDias.php");
 include("mostrarClases.php");
+
+function restarDatos($restarDias){
+    try {
+        $BD = Conexion::connect();
+        $prof_DNI = 123; 
+        $query = "UPDATE profesor SET diasClases = diasClases - ? WHERE prof_DNI = ?";
+        $stmt = $BD->prepare($query);
+        $stmt->bind_param("ii", $restarDias, $prof_DNI);
+        $stmt->execute();
+        $stmt->close();
+
+        echo "Días actualizados correctamente.";
+    } catch (PDOException $e) {
+        die("ERROR: " . $e->getMessage());
+    }
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['btnRestarDias'])) {
+    $restarDias = $_POST['restarDias']; 
+    restarDatos($restarDias);
+}
 ?>
+<script>
+    function validarNumerosTecla(event) {
+        const tecla = event.key;
+        const numerosPermitidos = /^[-0-9]$/;
+        if (tecla !== "Backspace" && tecla !== "Delete" && (!numerosPermitidos.test(tecla) || event.key === " ")) {
+            event.preventDefault();
+        }
+}
+</script>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -20,17 +49,17 @@ include("mostrarClases.php");
         <hr />
         <div class="mb-3">
             <label for="CantidadClases" class="form-label">Insertar cantidad total de clases</label>
-            <input type="text" class="form-control" id="cantidadClases" name="diasClases"  placeholder="Insertar cantidad total de clases"/>
+            <input type="text" class="form-control" id="cantidadClases" name="diasClases"  placeholder="Insertar cantidad total de clases" onkeydown="validarNumerosTecla(event)"/>
         </div>
         <hr />
         <div class="mb-3">
             <label for="libreDias" class="form-label">Ingresar porcentaje de libre.</label>
-            <input type="text" class="form-control" id="libreDias" name="porcentajeLibre" />
+            <input type="text" class="form-control" id="libreDias" name="porcentajeLibre" onkeydown="validarNumerosTecla(event)" />
         </div>
         <hr />
         <div class="mb-3">
             <label for="promocionDias" class="form-label">Ingresar porcentaje de promocion.</label>
-            <input type="text" class="form-control" id="promocionDias" name="porcentajePromocion" />
+            <input type="text" class="form-control" id="promocionDias" name="porcentajePromocion" onkeydown="validarNumerosTecla(event)" />
         </div>
         <button type="submit" class="btn btn-primary" name="btnRegistrar" value="ok" > Ingresar Parametros</button>
         <hr />
@@ -38,9 +67,9 @@ include("mostrarClases.php");
     </form>
     <form method="POST" action="clases.php">
         <label for="restarDias" class="form-label">Ingresar Feriados/Dias sin clases.</label>
-        <input type="text" class="form-control" id="restarDias" name="restarDias" />
-        </div>
-        <button type="submit" class="btn btn-primary" name="btnRegistrar" value="ok">Restar Dias</button>
+        <input type="text" class="form-control" id="restarDias" name="restarDias" onkeydown="validarNumerosTecla(event)" />
+        <br>
+        <button type="submit" class="btn btn-primary" name="btnRestarDias" value="ok" >Restar Dias</button>
     </form>
     </div>
      <div class="col-8 p-4">
@@ -70,7 +99,10 @@ include("mostrarClases.php");
             </table>
         </div>
     <?php
-    updateDiasProfesor();
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['btnRegistrar'])) {
+        updateDiasProfesor();
+    }
     ?>
 
     <script src="../Bootstrap/js/bootstrap.bundle.min.js"></script>
