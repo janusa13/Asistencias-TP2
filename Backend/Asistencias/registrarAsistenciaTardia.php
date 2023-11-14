@@ -30,7 +30,7 @@ $msg_err="";
                 $msg_err = "Insertar datos";
             }
         } catch (Exception $e) {
-            $msg_err = "Error: " . $e->getMessage();
+            $msg_err = "<div class='alert alert-warning'>DNI no encontrado.</div>";
             echo $msg_err;
         }
         }

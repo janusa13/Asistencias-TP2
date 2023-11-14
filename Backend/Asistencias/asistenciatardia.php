@@ -9,7 +9,7 @@ $msg_err=asistenciaTardia($msg_err);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../Bootstrap/css/bootstrap.min.css" />
-    <title>T.S.A</title>
+    <title>N.W.A</title>
 </head>
 <body>
    <h3 class=" text-center p-3"><a href="../home.php">N.W.A</a></h3>
