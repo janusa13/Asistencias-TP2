@@ -86,7 +86,7 @@ $msg_err = insertarAlumno();
   function validarNumerosTecla(event) {
   const tecla = event.key;
   const numerosPermitidos = /^[1-9]$/;
-  
+
   if (tecla !== "Backspace" && tecla !== "Delete" && (!numerosPermitidos.test(tecla) || event.key === " ")) {
     event.preventDefault();
   }

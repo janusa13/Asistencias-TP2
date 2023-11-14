@@ -1,25 +1,25 @@
 <?php
 require_once("../Conexion/conexion.php");
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $dias = $_POST["dias"];
-    $hora_entrada = $_POST["entrada"];
-    $hora_salida = $_POST["salida"];
+    $fecha = $_POST["fecha"];
     $materia_id = $_POST["id"];
-    if ($nota && $trabajo_id && $materia_id != NULL) {
-        $check_query = "SELECT COUNT(*) FROM alumno WHERE materia_id = :materia_id";
+    $alumno_dni = $_POST["DNI"];
+    $estado = $_POST["estado"];
+    if ($fecha && $materia_id && $alumno_dni && $estado != NULL) {
+        $check_query = "SELECT COUNT(*) FROM alumno WHERE alumno_dni = :alumno_dni";
         $check_stmt = $connect->prepare($check_query);
-        $check_stmt->bindParam(":materia_id", $materia_id);
+        $check_stmt->bindParam(":alumno_dni", $alumno_dni);
         $check_stmt->execute();
         $num_rows = $check_stmt->fetchColumn();
 
         if ($num_rows == 0) {
-            $query = "insert into horarios(dias,entrada,salida,id) 
-            values(:dias,:entrada,:salida,:id)";
+            $query = "insert into asistencia(fecha,id,DNI,estado) 
+            values(:fecha,:id,:DNI,:estado)";
             $stmt = $connect->prepare($query);
-            $stmt->bindParam(":dias", $dias);
-            $stmt->bindParam(":entrada", $hora_entrada);
-            $stmt->bindParam(":salida", $hora_salida);
+            $stmt->bindParam(":fecha", $fecha);
             $stmt->bindParam(":id", $materia_id);
+            $stmt->bindParam(":dni", $alumno_dni);
+            $stmt->bindParam(":estado", $estado);
             $stmt->execute();
             print($nombre . "agregado correctamente.");
         } else {

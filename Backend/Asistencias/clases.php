@@ -39,7 +39,7 @@ include("mostrarClases.php");
     <form method="POST" action="clases.php">
         <label for="restarDias" class="form-label">Ingresar Feriados/Dias sin clases.</label>
         <input type="text" class="form-control" id="restarDias" name="restarDias" />
-        <br>
+        </div>
         <button type="submit" class="btn btn-primary" name="btnRegistrar" value="ok">Restar Dias</button>
     </form>
     </div>
