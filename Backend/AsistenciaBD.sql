@@ -21,7 +21,6 @@ CREATE TABLE Asistencia (
     fecha DATE,
     FOREIGN KEY(alumno_FK) REFERENCES Alumno(alumn_DNI) ON UPDATE CASCADE
 );
-
 INSERT INTO Profesor (prof_DNI, telefono, apellido, nombre)
 VALUES (
         123,
@@ -119,7 +118,7 @@ VALUES (
         '1999-01-01'
     );
 INSERT INTO Alumno (alumn_DNI, nombre, apellido, fecha_nac)
-VALUES (45148325, 'Maria Pia', 'Melgarejo', '1999-01-01');
+VALUES (42070085, 'Maria Pia', 'Melgarejo', '1999-01-01');
 INSERT INTO Alumno (alumn_DNI, nombre, apellido, fecha_nac)
 VALUES (
         43631710,
@@ -149,7 +148,7 @@ VALUES (
         '1999-01-01'
     );
 INSERT INTO Alumno (alumn_DNI, nombre, apellido, fecha_nac)
-VALUES (45248325, 'Marcos', 'Reynoso', '1999-01-01');
+VALUES (38570361, 'Marcos', 'Reynoso', '1999-01-01');
 INSERT INTO Alumno (alumn_DNI, nombre, apellido, fecha_nac)
 VALUES (
         39255959,

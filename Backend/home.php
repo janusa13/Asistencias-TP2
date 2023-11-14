@@ -45,16 +45,16 @@ include("Alumno/Asistencia.php");
         </form>
         <div class="col-8 p-4" id="alumnos">
             <table class="table table-striped" >
-                <thead>
+                <thead class="columnas">
                     <tr>
-                        <th scope="col">DNI</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Apellido</th>
-                        <th scope="col">Fecha de Nacimiento</th>
-                        <th scope="col">Asistencias</th>
-                        <th scope="col">Porcentaje</th>
-                        <th scope="col">Condicion</th>
-                        <th scope="col"></th>
+                            <th scope="col">DNI</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Apellido</th>
+                            <th scope="col">Fecha de Nacimiento</th>
+                            <th scope="col">Asistencias</th>
+                            <th scope="col">Porcentaje</th>
+                            <th scope="col">Condicion</th>
+                            <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
