@@ -71,8 +71,16 @@
                 <td ><?php echo $alumno->alumnoPorcentaje($alumno) . "%"; ?></td>
                 <td ><?php echo $alumno->condicionAlumno($alumno); ?></td>
                 <td>
-                    <a class="btn btn-small btn-primary" href="Alumno/Asistencia.php?alumn_DNI=<?= $alumno->alumn_DNI ?>">Asistio</a>
-                    
+                    <?php
+                        $condicion=$alumno->alumnoPorcentaje($alumno);
+                        if ($condicion<100){
+                            ?><a class="btn btn-small btn-primary" href="Alumno/Asistencia.php?alumn_DNI=<?= $alumno->alumn_DNI ?>">Asistio</a>
+                        <?php
+                        }elseif($condicion>=100){
+                            ?><a class="btn btn-small btn-secondary">Asistio</a>
+                            <?php
+                        }
+                    ?>
                 </td>
             </tr>
         <?php

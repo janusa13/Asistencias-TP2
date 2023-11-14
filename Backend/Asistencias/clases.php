@@ -72,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['btnRestarDias'])) {
         <button type="submit" class="btn btn-primary" name="btnRestarDias" value="ok" >Restar Dias</button>
     </form>
     </div>
-     <div class="col-8 p-4">
+    <div class="col-8 p-4">
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -87,7 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['btnRestarDias'])) {
                     $resultados = mostrarClases();
                     foreach ($resultados as $datos) {
                         ?>
-                         <tr>
+                        <tr>
                 <th   scope="row"><?php echo $datos["diasClases"]; ?></th>
                 <td><?php echo $datos["porcentajeLibre"]; ?></td>
                 <td><?php echo $datos["porcentajePromocion"]; ?></td>

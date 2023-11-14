@@ -22,7 +22,7 @@ include("Alumno/Asistencia.php");
         </a>
         <a href="Alumno\insertAlumno.PHP" type="button" class="btn btn-outline-primary">Opciones de Alumnos</a>
         <a href="Asistencias\clases.PHP" type="button" class="btn btn-outline-primary">Parametros</a>
-        <a type="button" class="btn btn-outline-danger" href="Asistencias\asistenciatardia.php" >Asistencia Tardia</a>
+        <a type="button" class="btn btn-outline-danger" href="Asistencias\asistenciatardia.php" >Asistencia Manual</a>
     </nav>
     <div class="container-fluid row ">
         <form method="POST" action="home.php" class="col-4 p-3 shadow p-3 mb-5" id="buscar">
