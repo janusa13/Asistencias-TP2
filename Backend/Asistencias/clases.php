@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['btnRestarDias'])) {
 </head>
 
 <body>
-    <a href="../home.php" class=" text-center p-3">N.W.A</h3></a>
+    <a href="../home.php" class=" text-center p-3"><h3>N.W.A</h3></a>
     <form method="POST" action="clases.php" class="col-4 p-3 ">
         <h3 class="text-center text-secondary">Opciones de Parametros</h3>
         <hr />
@@ -51,12 +51,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['btnRestarDias'])) {
             <label for="CantidadClases" class="form-label">Insertar cantidad total de clases</label>
             <input type="text" class="form-control" id="cantidadClases" name="diasClases"  placeholder="Insertar cantidad total de clases" onkeydown="validarNumerosTecla(event)"/>
         </div>
-        <hr />
+        
         <div class="mb-3">
             <label for="libreDias" class="form-label">Ingresar porcentaje de libre.</label>
             <input type="text" class="form-control" id="libreDias" name="porcentajeLibre" onkeydown="validarNumerosTecla(event)" />
         </div>
-        <hr />
         <div class="mb-3">
             <label for="promocionDias" class="form-label">Ingresar porcentaje de promocion.</label>
             <input type="text" class="form-control" id="promocionDias" name="porcentajePromocion" onkeydown="validarNumerosTecla(event)" />
