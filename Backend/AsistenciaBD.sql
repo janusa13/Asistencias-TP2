@@ -19,7 +19,7 @@ CREATE TABLE Alumno (
 CREATE TABLE Asistencia (
     alumno_FK INT,
     fecha DATE,
-    FOREIGN KEY(alumno_FK) REFERENCES Alumno(alumn_DNI) ON UPDATE CASCADE
+    FOREIGN KEY(alumno_FK) REFERENCES Alumno(alumn_DNI) ON UPDATE CASCADE ON DELETE CASCADE
 );
 INSERT INTO Profesor (prof_DNI, telefono, apellido, nombre)
 VALUES (
