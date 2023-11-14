@@ -8,18 +8,14 @@ if (isset($_POST["btnRegistrar"])) {
     $nombre = $_POST["nombre"];
     $apellido = $_POST["apellido"];
     $fecha_nac = $_POST["fecha_nac"];
-
+    
     try {
         $BD = Conexion::connect();
-
-        // Primero, actualiza los registros en la tabla "Asistencia" que hacen referencia al DNI antiguo.
         $update_asistencia_query = "UPDATE Asistencia SET alumno_FK = ? WHERE alumno_FK = ?";
         $update_asistencia_stmt = $BD->prepare($update_asistencia_query);
         $update_asistencia_stmt->bind_param("ii", $alumn_DNI, $viejo_DNI);
         $update_asistencia_stmt->execute();
         $update_asistencia_stmt->close();
-
-        // Luego, actualiza el DNI del alumno en la tabla "Alumno".
         $update_alumno_query = "UPDATE Alumno SET alumn_DNI = ?, nombre = ?, apellido = ?, fecha_nac = ? WHERE alumn_DNI = ?";
         $update_alumno_stmt = $BD->prepare($update_alumno_query);
         $update_alumno_stmt->bind_param("isssi", $alumn_DNI, $nombre, $apellido, $fecha_nac, $viejo_DNI);
@@ -64,22 +60,22 @@ try {
     foreach ($alumnos as $alumno_data) {
       $alumno = new Alumno($alumno_data['alumn_DNI'], $alumno_data['nombre'], $alumno_data['apellido'], $alumno_data['fecha_nac'], $alumno_data['asistencias']);
     ?>
-      <input type="hidden" name="viejo_DNI" value="<?php echo $alumno->alumn_DNI; ?>" />
+      <input type="hidden" name="viejo_DNI" value="<?php echo $alumno->alumn_DNI; ?>" required/>
       <div class="mb-3">
         <label for="alumn_dni" class="form-label">DNI</label>
-        <input type="text" class="form-control" name="alumn_DNI" id="alumn_dni" aria-describedby="dni_alumno" value="<?php echo $alumno->alumn_DNI; ?>" onkeydown="validarNumerosTecla(event)">
+        <input type="text" class="form-control" name="alumn_DNI" id="alumn_dni" aria-describedby="dni_alumno" value="<?php echo $alumno->alumn_DNI; ?>" onkeydown="validarNumerosTecla(event)" required>
       </div>
       <div class="mb-3">
         <label for="nombre_alumno" class="form-label">Nombre</label>
-        <input type="text" class="form-control" id="nombre_alumno" name="nombre" value="<?php echo $alumno->nombre; ?>"onkeydown="validarTecla(event)">
+        <input type="text" class="form-control" id="nombre_alumno" name="nombre" value="<?php echo $alumno->nombre; ?>"onkeydown="validarTecla(event)" required>
       </div>
       <div class="mb-3">
         <label for="apellido_alumno" class="form-label">Apellido</label>
-        <input type="text" class="form-control" id="apellido_alumno" name="apellido" value="<?php echo $alumno->apellido; ?>"onkeydown="validarTecla(event)">
+        <input type="text" class="form-control" id="apellido_alumno" name="apellido" value="<?php echo $alumno->apellido; ?>"onkeydown="validarTecla(event)" required>
       </div>
       <div class="mb-3">
         <label for="fecha_alumn" class="form-label">Fecha de nacimiento</label>
-        <input type="date" class="form-control" id="fecha_nac" name="fecha_nac" value="<?php echo $alumno->fecha_nac; ?>">
+        <input type="date" class="form-control" id="fecha_nac" name="fecha_nac" value="<?php echo $alumno->fecha_nac; ?>" required>
       </div>
       <button type="submit" class="btn btn-primary" name="btnRegistrar" value="ok">Editar Alumno</button>
     <?php } ?>
