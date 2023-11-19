@@ -1,7 +1,6 @@
 <?php
-
     $msg_err="";
-
+    include("AlumnoTRAIT.php");
     //Funcion que permite agregar alumnos
     function insertarAlumno(){   
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -45,6 +44,7 @@
 
     }
     class Alumno{
+        use notas;
         public $alumn_DNI;
         public $nombre;
         public $apellido;
@@ -61,7 +61,8 @@
         }
 
         public function mostrarAlumnos($alumno){?>
-            <tr>
+            
+           <tr class="<?php echo htmlspecialchars($alumno->condicionAlumno($alumno)); ?>">
                 <th class="porcentajeAlumno"  scope="row"><?php echo $alumno->alumn_DNI; ?></th>
                 <td><?php echo $alumno->nombre; ?></td>
                 <td><?php echo $alumno->apellido; ?></td>

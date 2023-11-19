@@ -1,16 +1,23 @@
 #buscar {
-  top: 95px;
+  top: 125px;
   border: 3px;
   border-radius: 2rem;
+  background-color: #161b22;
   height: 26%;
-  background-color: whitesmoke;
   position: sticky;
 }
 #nav {
   position: sticky;
-  top: 0.5px;
+  display: flex;
+  gap: 2rem;
+  flex-direction: row;
+  background-color: #161b22;
+  border-radius: 10px;
+  top: 8px;
+
+  z-index: 1;
 }
 .columnas {
   position: sticky;
-  top: 90px;
+  top: 95px;
 }

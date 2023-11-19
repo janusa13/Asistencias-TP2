@@ -4,7 +4,7 @@ include("../Conexion/conexion.php");
 $msg_err = insertarAlumno();
 ?>
 <!DOCTYPE html>
-<html lang="esp">
+<html lang="esp" data-bs-theme="dark">
 
 <head>
   <meta charset="UTF-8" />
@@ -15,9 +15,9 @@ $msg_err = insertarAlumno();
 </head>
 
 <body>
-  <h3 class=" text-center p-3"><a href="../home.php">N.W.A</a></h3>
-  <div class="container-fluid row">
-    <form method="POST" action="insertAlumno.php" class="col-4 p-3">
+  <h3 class=" text-center p-3" id="nwa"><a href="../home.php">N.W.A</a></h3>
+  <div class=" container-fluid row">
+    <form method="POST" action="insertAlumno.php" class="col-4 p-3" id="registrarAlumno">
       <h3 class="text-center text-secondary">Registrar Alumno</h3>
       <?php
       if (!empty($msg_err)) {
@@ -32,7 +32,7 @@ $msg_err = insertarAlumno();
         }
       }
       ?>
-      <div class="mb-3">
+      <div>
         <label for="alumn_dni" class="form-label">DNI</label>
         <input type="text" class="form-control" name="alumn_DNI" id="alumn_dni" placeholder="Solo numeros" aria-describedby="dni_alumno" onkeydown="validarNumerosTecla(event)">
         <div class="mb-3">

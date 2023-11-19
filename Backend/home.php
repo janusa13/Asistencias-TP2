@@ -5,7 +5,7 @@ include("Conexion/conexion.php");
 include("Alumno/Asistencia.php");
 ?>
 <!DOCTYPE html>
-<html lang="esp">
+<html lang="esp" data-bs-theme="dark">
 
 <head>
     <meta charset="UTF-8" />
@@ -16,7 +16,10 @@ include("Alumno/Asistencia.php");
 </head>
 
 <body class="p-2">
-    <nav class="navbar navbar-expand-lg navbar-light  bg-light" id="nav">
+    <div class="inv">
+        <spam></spam>
+    </div>
+    <nav class="navbar navbar-expand-lg " id="nav">
         <a class="titulo" href="home.php">
             <h3 class=" text-center p-3">N.W.A</h3>
         </a>
@@ -55,6 +58,7 @@ include("Alumno/Asistencia.php");
                             <th scope="col">Porcentaje</th>
                             <th scope="col">Condicion</th>
                             <th scope="col"></th>
+                            
                     </tr>
                 </thead>
                 <tbody>
@@ -89,6 +93,7 @@ include("Alumno/Asistencia.php");
         </div>
     </div>
     <script src="Bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="index.js"></script>
 
 </body>
 

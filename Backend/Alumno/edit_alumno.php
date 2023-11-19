@@ -11,11 +11,6 @@ if (isset($_POST["btnRegistrar"])) {
     
     try {
         $BD = Conexion::connect();
-        $update_asistencia_query = "UPDATE Asistencia SET alumno_FK = ? WHERE alumno_FK = ?";
-        $update_asistencia_stmt = $BD->prepare($update_asistencia_query);
-        $update_asistencia_stmt->bind_param("ii", $alumn_DNI, $viejo_DNI);
-        $update_asistencia_stmt->execute();
-        $update_asistencia_stmt->close();
         $update_alumno_query = "UPDATE Alumno SET alumn_DNI = ?, nombre = ?, apellido = ?, fecha_nac = ? WHERE alumn_DNI = ?";
         $update_alumno_stmt = $BD->prepare($update_alumno_query);
         $update_alumno_stmt->bind_param("isssi", $alumn_DNI, $nombre, $apellido, $fecha_nac, $viejo_DNI);
