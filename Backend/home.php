@@ -15,10 +15,7 @@ include("Alumno/Asistencia.php");
     <title>T.S.A</title>
 </head>
 
-<body class="p-2">
-    <div class="inv">
-        <spam></spam>
-    </div>
+<body class="p-9">
     <nav class="navbar navbar-expand-lg " id="nav">
         <a class="titulo" href="home.php">
             <h3 class=" text-center p-3">N.W.A</h3>
@@ -26,6 +23,7 @@ include("Alumno/Asistencia.php");
         <a href="Alumno\insertAlumno.PHP" type="button" class="btn btn-outline-primary">Opciones de Alumnos</a>
         <a href="Asistencias\clases.PHP" type="button" class="btn btn-outline-primary">Parametros</a>
         <a type="button" class="btn btn-outline-danger" href="Asistencias\asistenciatardia.php" >Asistencia Manual</a>
+        <a type="button" class="btn btn-outline-danger" href="Alumno\notas.php" >Agregar Notas</a>
     </nav>
     <div class="container-fluid row ">
         <form method="POST" action="home.php" class="col-4 p-3 shadow p-3 mb-5" id="buscar">
@@ -47,7 +45,7 @@ include("Alumno/Asistencia.php");
             </div>
         </form>
         <div class="col-8 p-4" id="alumnos">
-            <table class="table table-striped" >
+            <table class="table table-striped">
                 <thead class="columnas">
                     <tr>
                             <th scope="col">DNI</th>
@@ -57,6 +55,7 @@ include("Alumno/Asistencia.php");
                             <th scope="col">Asistencias</th>
                             <th scope="col">Porcentaje</th>
                             <th scope="col">Condicion</th>
+                            <th scope="col">Promedio de Nota</th>
                             <th scope="col"></th>
                             
                     </tr>

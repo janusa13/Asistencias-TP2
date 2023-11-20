@@ -71,6 +71,7 @@
                             echo $alumno->asistencias; ?></td>
                 <td ><?php echo $alumno->alumnoPorcentaje($alumno) . "%"; ?></td>
                 <td ><?php echo $alumno->condicionAlumno($alumno); ?></td>
+                 <td ><?php echo $alumno::promedioNotas($alumno); ?></td>
                 <td>
                     <?php
                         $condicion=$alumno->alumnoPorcentaje($alumno);

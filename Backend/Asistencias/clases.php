@@ -33,8 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['btnRestarDias'])) {
 }
 </script>
 <!DOCTYPE html>
-<html lang="es">
-
+<html lang="esp" data-bs-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

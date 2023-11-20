@@ -34,7 +34,7 @@
                     $promedioNotas = $nota1 + $nota2;
                     $promedioNotas=$promedioNotas/2;
                 } else {
-                    echo "No se encontraron registros para el alumno.";
+                  
                 }
             } catch (Exception $e) {
                 echo $e;
